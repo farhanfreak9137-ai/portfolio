@@ -1,0 +1,8 @@
+{
+  "name": "Remix Farhan | Portfolio",
+  "description": "Personal portfolio for Md Farhan Hossain, Frontend Developer & AI Builder showcasing Atlas OS, HSC AI Study Intelligence System, and Gym Tracker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
