@@ -9,16 +9,31 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenResume }) => {
   const [copiedCode, setCopiedCode] = useState(false);
-  const [activeCodeTab, setActiveCodeTab] = useState<'config' | 'atlas' | 'hsc' | 'stack'>('config');
+  const [activeCodeTab, setActiveCodeTab] = useState<'agent-hq' | 'config' | 'atlas' | 'hsc' | 'stack'>('agent-hq');
 
   const codeSnippets = {
+    'agent-hq': `// AgentHQOrchestrator.ts
+import { DAGPlanner, ProviderCascade, SQLiteStorage } from '@/agent-hq';
+
+export async function executeMission(prompt: string) {
+  const dag = await DAGPlanner.decompose(prompt, {
+    agents: ["boss", "atlas", "outreach", "sentinel"]
+  });
+
+  const stream = await ProviderCascade.executeWithFallback(dag, {
+    primary: "gemini-2.0-flash",
+    fallback: ["groq-llama-3.3", "antigravity-cli"]
+  });
+
+  return SQLiteStorage.saveRun({ mission: prompt, stream });
+}`,
     config: `// farhan.config.ts
 export const developer = {
   name: "Md Farhan Hossain",
-  role: "Frontend Developer & AI Builder",
-  focus: ["React 19", "TypeScript", "Next.js", "AI Study Systems"],
-  status: "Available for projects & contracts",
-  motto: "Building practical, responsive web applications"
+  role: "Software Developer & AI Builder",
+  focus: ["Multi-Agent Systems", "React 19", "TypeScript", "Node.js", "SQLite"],
+  status: "Available for AI engineering & contracts",
+  motto: "Engineering autonomous agent systems and production web apps"
 };`,
     atlas: `// AtlasProductivity.tsx
 import { TaskBoard, HabitTracker, GeminiAI } from '@/atlas';
@@ -197,6 +212,16 @@ export const coreSkills = [
 
               {/* Code Tabs */}
               <div className="flex items-center border-b border-white/10 bg-zinc-950 px-2 pt-2 text-xs font-mono">
+                <button
+                  onClick={() => setActiveCodeTab('agent-hq')}
+                  className={`px-3 py-1.5 rounded-t-lg transition-colors ${
+                    activeCodeTab === 'agent-hq'
+                      ? 'bg-[#0a0a0c] text-cyan-400 font-semibold border-t-2 border-cyan-400'
+                      : 'text-zinc-500 hover:text-zinc-300'
+                  }`}
+                >
+                  AgentHQ.ts
+                </button>
                 <button
                   onClick={() => setActiveCodeTab('config')}
                   className={`px-3 py-1.5 rounded-t-lg transition-colors ${

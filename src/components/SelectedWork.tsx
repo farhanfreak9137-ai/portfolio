@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, ArrowRight, Layers, Layout, Sparkles, CheckCircle2, GraduationCap, BrainCircuit, BookOpen, Clock, Award, ShieldAlert } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Layers, Layout, Sparkles, CheckCircle2, GraduationCap, BrainCircuit, BookOpen, Clock, Award, ShieldAlert, Bot, Workflow, Mail, Bell, Database, Cpu } from 'lucide-react';
 import { projects } from '../data/portfolioData';
 import { Project } from '../types';
 
@@ -10,10 +10,12 @@ interface SelectedWorkProps {
 }
 
 export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
-  const atlasProject = projects.find(p => p.id === 'atlas') || projects[0];
-  const hscProject = projects.find(p => p.id === 'hsc-ai-system') || projects[0];
-  const gymProject = projects.find(p => p.id === 'gym-tracker') || projects[1];
+  const agentHqProject = projects.find(p => p.id === 'agent-hq') || projects[0];
+  const atlasProject = projects.find(p => p.id === 'atlas') || projects[1];
+  const hscProject = projects.find(p => p.id === 'hsc-ai-system') || projects[2];
+  const gymProject = projects.find(p => p.id === 'gym-tracker') || projects[3];
 
+  const [activeAgentHqScreenshotIndex, setActiveAgentHqScreenshotIndex] = useState(0);
   const [activeAtlasScreenshotIndex, setActiveAtlasScreenshotIndex] = useState(0);
   const [activeHscScreenshotIndex, setActiveHscScreenshotIndex] = useState(0);
 
@@ -31,11 +33,173 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
             Featured Work
           </h2>
           <p className="text-lg text-zinc-400">
-            A selection of AI platforms, full-stack web applications, and productivity tools I've engineered.
+            A selection of autonomous AI agent engines, full-stack web applications, and productivity systems I have engineered.
           </p>
         </div>
 
-        {/* 1. ATLAS FEATURED SHOWCASE */}
+        {/* 1. AGENT HQ SUPREME FLAGSHIP SHOWCASE */}
+        <div className="relative rounded-3xl bg-zinc-900/40 border border-cyan-500/20 hover:border-cyan-500/40 transition-all shadow-2xl overflow-hidden group">
+          {/* Subtle accent glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[130px] rounded-full pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 lg:p-12 items-center">
+            
+            {/* Left Info Column */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <div className="flex items-center gap-3">
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                  {agentHqProject.category}
+                </span>
+                <span className="text-xs text-emerald-400 font-mono font-medium flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Primary Flagship
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
+                  {agentHqProject.name}
+                </h3>
+                <p className="text-zinc-300 font-medium text-sm sm:text-base">
+                  {agentHqProject.tagline}
+                </p>
+              </div>
+
+              <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+                {agentHqProject.description}
+              </p>
+
+              {/* System Architecture Highlights */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-cyan-300 font-semibold">
+                    <Workflow className="w-3.5 h-3.5" />
+                    <span>DAG Scheduler</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Directed Acyclic Graph execution with backpressure queue limits.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-cyan-300 font-semibold">
+                    <Bot className="w-3.5 h-3.5" />
+                    <span>6-Agent Roster</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Boss, Atlas, Sentinel, Nova, Outreach, and Strategist agents.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-cyan-300 font-semibold">
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Gmail Outreach & CRM</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    SMTP anti-spam pacing with automated XLSX attachments.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-cyan-300 font-semibold">
+                    <Bell className="w-3.5 h-3.5" />
+                    <span>Discord Mobile Alerts</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Instant push notifications when recruiters reply to applications.
+                  </p>
+                </div>
+              </div>
+
+              {/* Technology Tags */}
+              <div className="space-y-2 pt-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">
+                  Technologies
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {agentHqProject.technologies.slice(0, 8).map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-300 font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {agentHqProject.technologies.length > 8 && (
+                    <span className="px-2.5 py-1 rounded-lg bg-zinc-900/60 border border-white/5 text-xs text-zinc-400 font-mono">
+                      +{agentHqProject.technologies.length - 8} more
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={() => onSelectProject(agentHqProject)}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-sm transition-all shadow-md shadow-cyan-400/20 active:scale-95 cursor-pointer"
+                >
+                  <span>View Architecture & Details</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                {agentHqProject.githubUrl && (
+                  <a
+                    href={agentHqProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-semibold text-sm border border-white/10 transition-all cursor-pointer"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub Repository</span>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Right Interactive Visual Column */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl group">
+                <img
+                  src={agentHqProject.screenshots[activeAgentHqScreenshotIndex] || agentHqProject.screenshots[0]}
+                  alt="Agent HQ Screenshot"
+                  className="w-full h-auto object-cover max-h-[440px] transition-transform duration-500 group-hover:scale-[1.01]"
+                />
+
+                {/* Screenshot caption overlay */}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/80 to-transparent p-4 text-left">
+                  <p className="text-xs font-mono font-semibold text-cyan-300">
+                    {agentHqProject.screenshotTitles?.[activeAgentHqScreenshotIndex] || "Agent HQ Interface"}
+                  </p>
+                  <p className="text-[11px] text-zinc-300 mt-0.5 line-clamp-2 font-normal">
+                    {agentHqProject.screenshotDescriptions?.[activeAgentHqScreenshotIndex]}
+                  </p>
+                </div>
+              </div>
+
+              {/* Screenshot Selector Buttons */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {agentHqProject.screenshots.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveAgentHqScreenshotIndex(idx)}
+                    className={`px-2 py-2 rounded-xl border text-center transition-all text-xs font-mono cursor-pointer ${
+                      activeAgentHqScreenshotIndex === idx
+                        ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50 font-bold shadow-sm'
+                        : 'bg-zinc-900/60 text-zinc-400 border-white/5 hover:border-white/15 hover:text-white'
+                    }`}
+                  >
+                    {idx === 0 ? "1. Canvas" : idx === 1 ? "2. Outreach" : idx === 2 ? "3. CRM Workbench" : "4. Discord Alerts"}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* 2. ATLAS FEATURED SHOWCASE */}
         <div className="relative rounded-3xl bg-zinc-900/40 border border-white/10 hover:border-[#4DA3FF]/30 transition-all shadow-2xl overflow-hidden group">
           {/* Subtle accent glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#4DA3FF]/10 blur-[120px] rounded-full pointer-events-none" />
@@ -48,9 +212,9 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
                 <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-white/10 text-zinc-200 border border-white/10">
                   {atlasProject.category}
                 </span>
-                <span className="text-xs text-emerald-400 font-mono font-medium flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Flagship Platform
+                <span className="text-xs text-indigo-400 font-mono font-medium flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-indigo-400" />
+                  Personal OS
                 </span>
               </div>
 

@@ -12,6 +12,10 @@ import hscAiDashboardImg from '../assets/images/hsc_ai_dark_dashboard.png';
 import hscAiTutorImg from '../assets/images/hsc_ai_dark_tutor.png';
 import hscAiExamsImg from '../assets/images/hsc_ai_dark_exams.png';
 import hscAiQuestionBankImg from '../assets/images/hsc_ai_dark_question_bank.png';
+import agentHqCanvasImg from '../assets/images/agent_hq_workspace_canvas.png';
+import agentHqEmailCrmImg from '../assets/images/agent_hq_email_crm_modal.png';
+import agentHqWorkbenchImg from '../assets/images/agent_hq_crm_workbench.png';
+import agentHqProfileImg from '../assets/images/agent_hq_profile_outreach_config.png';
 
 export const personalInfo: PersonalInfo = {
   name: "Md Farhan Hossain",
@@ -23,7 +27,7 @@ export const personalInfo: PersonalInfo = {
   bioHeading: "Crafting modern web applications & AI tools with speed and precision.",
   bioParagraphs: [
     "I'm Md Farhan Hossain, a frontend developer and AI builder based in Dhaka, Bangladesh. With a solid academic foundation in Science from MDC Model Institute (SSC 2025) and Milestone College (Science Stream), I bridge computational foundations with modern, hands-on web application development.",
-    "My journey in code gained momentum when I embraced Artificial Intelligence as a force-multiplier in software engineering. What began as curiosity quickly grew into constructing full-featured, real-world tools—from personal productivity operating systems (Atlas) to curriculum-grounded study intelligence platforms (HSC AI System) and fitness analytics.",
+    "My journey in code gained momentum when I embraced Artificial Intelligence as a force-multiplier in software engineering. What began as curiosity quickly grew into constructing full-featured, real-world tools—from autonomous multi-agent orchestration engines (Agent HQ) to personal productivity operating systems (Atlas) and curriculum-grounded study intelligence platforms (HSC AI System).",
     "I specialize in building highly responsive user interfaces using React, Next.js, TypeScript, and Tailwind CSS, coupled with intelligent AI features using the Google Gemini API. I focus on sub-100ms state updates, modular architecture, clean typography, and zero visual bloat.",
     "Whether architecting interactive dashboards or crafting custom workflows, my focus remains constant: converting complex user problems into elegant, production-ready software experiences."
   ],
@@ -46,7 +50,7 @@ export const personalInfo: PersonalInfo = {
   location: "Dhaka, Bangladesh",
   availability: "Open for web apps & AI projects",
   email: "farhan.sajid1896@gmail.com",
-  githubUrl: "https://github.com/farhanfreak9137-ai/Atlas",
+  githubUrl: "https://github.com/farhanfreak9137-ai",
   twitterUrl: "https://x.com"
 };
 
@@ -124,9 +128,124 @@ export const gymTrackerScreenshotMetadata = [
   }
 ];
 
+export const agentHqScreenshots = [
+  agentHqCanvasImg,
+  agentHqEmailCrmImg,
+  agentHqWorkbenchImg,
+  agentHqProfileImg,
+];
+
+export const agentHqScreenshotMetadata = [
+  {
+    title: "1. 2D Multi-Agent Operating Canvas",
+    description: "Interactive real-time canvas visualizing specialized agent nodes (Boss, Atlas, Sentinel, Nova, Outreach, Strategist), active DAG task dependencies, system telemetry, and event bus state."
+  },
+  {
+    title: "2. Cold Outreach Engine & Staged Outbox",
+    description: "Automated job application dispatcher generating customized pitches from job workbooks, attaching real XLSX and Markdown deliverables, with 20s anti-spam delivery pacing."
+  },
+  {
+    title: "3. Recruiter Replies CRM & AI Workbench",
+    description: "IMAP inbox listener classifying recruiter responses into Interview Invites, Questions, and Rejections with pre-drafted follow-ups and 1-click dispatch."
+  },
+  {
+    title: "4. Authoritative Profile & Discord Alerting",
+    description: "Profile master database linking Google App Password SMTP/IMAP credentials with instant real-time Discord webhook push alerts for recruiter responses."
+  }
+];
+
 export const atlasDemoVideo = "/projects/atlas/demo.mp4";
 
 export const projects: Project[] = [
+  {
+    id: "agent-hq",
+    name: "Agent HQ",
+    category: "Autonomous Multi-Agent Orchestration & Operations Platform",
+    tagline: "Local-first multi-agent orchestration engine with DAG task scheduling, persistent SQLite memory, provider fallback cascade, and automated Gmail outreach CRM.",
+    description: "A full-featured multi-agent operations platform built for autonomous task planning, multi-agent collaboration (Boss, Atlas, Sentinel, Nova, Outreach, Strategist), directed acyclic graph (DAG) scheduling, and cold outreach automation via Gmail SMTP/IMAP with real-time Discord mobile push alerts.",
+    problem: "Modern AI applications often rely on single-prompt scripts or unmanaged chat sessions that lack persistent operational memory, cannot coordinate multiple specialized roles, fail under API rate limits, and cannot interface with real-world operating systems, filesystems, and email protocols.",
+    solution: "Architected a local-first multi-agent operating engine with a reactive DAG scheduler, persistent SQLite storage, dynamic multi-provider rotation (Gemini, Groq, OpenAI, Antigravity CLI), live Server-Sent Events (SSE) telemetry, and end-to-end cold outreach with automated recruiter reply classification and mobile push alerts.",
+    technologies: [
+      "React 19",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "SQLite (better-sqlite3)",
+      "Gemini 2.0 API",
+      "Groq / Llama 3.3",
+      "OpenAI GPT-4o",
+      "Google Antigravity CLI",
+      "Tailwind CSS 4",
+      "Vite",
+      "Nodemailer",
+      "ImapFlow"
+    ],
+    screenshots: agentHqScreenshots,
+    screenshotTitles: agentHqScreenshotMetadata.map(m => m.title),
+    screenshotDescriptions: agentHqScreenshotMetadata.map(m => m.description),
+    demoVideo: "/projects/agent-hq/demo.mp4",
+    liveUrl: "https://github.com/farhanfreak9137-ai/agent-hq",
+    githubUrl: "https://github.com/farhanfreak9137-ai/agent-hq",
+    isFeatured: true,
+    caseStudy: {
+      architectureOverview: "Agent HQ is architected around a decoupled client-server model: a responsive React 19 / Tailwind 2D workspace communicating over REST and Server-Sent Events (SSE) with an Express/Node.js runtime. The core orchestration layer implements a hierarchical DAG planner, a persistent SQLite database using WAL mode for transactional integrity, and a multi-provider AI cascade.",
+      componentHierarchy: [
+        "WorkspaceCanvas (2D Infinite Canvas, Agent Nodes, Live Telemetry & Event Stream)",
+        "BossOrchestrator (Mission Decomposition, Intent Parsing & Delegation)",
+        "Scheduler & BackpressureEnforcer (Dependency Resolution, Concurrency Throttling)",
+        "ProviderCascadeManager (Gemini API Pool, Groq, OpenAI, Antigravity CLI Bridge)",
+        "EmailIntegrationHub (Gmail SMTP Outbox, Staggered Batching & XLSX Attachment Resolver)",
+        "ReplyListenerService (IMAP Idle/Poll, Deterministic Intent Classifier & CRM Workbench)",
+        "NotificationService (Discord Webhook Delivery & Formatted Embed Card Synthesis)"
+      ],
+      stateStrategy: "Employs an event-driven architecture with SQLite WAL persistence for agent state, mission graphs, outreach emails, and recruiter replies, synchronized to the React frontend via Server-Sent Events (SSE) for sub-50ms reactive updates.",
+      technicalChallenges: [
+        {
+          challenge: "Coordinating multi-step agent workflows without deadlocks or unbounded queue saturation during concurrent missions.",
+          solution: "Engineered a topological DAG scheduler with an active BackpressureEnforcer enforcing per-provider limits, queue depth bounds, and task lifecycle guarantees."
+        },
+        {
+          challenge: "Delivering real-time mobile push notifications for incoming email replies without requiring paid push servers or custom mobile apps.",
+          solution: "Implemented a zero-cost Discord Webhook pipeline sending rich color-coded embeds directly to the user's mobile device with instant recruiter intent categorization."
+        },
+        {
+          challenge: "Mitigating LLM rate limits and API quota exhaustion across multi-agent mission executions.",
+          solution: "Built a key-rotation pool for Gemini Flash combined with multi-provider fallbacks to Groq Llama 3.3 and local Antigravity CLI."
+        }
+      ],
+      outcomes: [
+        "Autonomous mission completion with multi-agent DAG task decomposition and verifiable workspace deliverables.",
+        "Integrated cold outreach system with zero-token recruiter intent classification and instant mobile Discord push alerts.",
+        "Resilient multi-provider architecture ensuring 99.9% uptime with zero operational cost."
+      ]
+    },
+    features: [
+      {
+        title: "Autonomous DAG Task Scheduler",
+        description: "Decomposes complex human missions into dependency-ordered Directed Acyclic Graphs with backpressure concurrency controls and automated retry loops."
+      },
+      {
+        title: "Specialized Multi-Agent Roster",
+        description: "Role-segregated agent team (Boss Commander, Atlas Researcher, Sentinel Security Auditor, Nova Creative Synthesizer, Outreach Agent, and Strategist) with private and shared memory."
+      },
+      {
+        title: "Multi-Provider LLM Rotation & Fallback",
+        description: "Resilient inference engine pooling Google Gemini 2.0 Flash, Groq (Llama 3.3-70b), OpenAI GPT-4o, and local Google Antigravity CLI with automatic failover."
+      },
+      {
+        title: "Direct Gmail Outreach Engine",
+        description: "Nodemailer SMTP integration with configurable anti-spam pacing (20s delay), automated XLSX/Markdown attachment resolution, and outbox staging."
+      },
+      {
+        title: "Recruiter Reply Listening & CRM",
+        description: "Background IMAP listener (imap.gmail.com:993) classifying recruiter responses into Interview Invites, Questions, and Rejections, pre-drafting tailored responses with zero token cost."
+      },
+      {
+        title: "Instant Discord Mobile Alerts",
+        description: "Real-time webhook notifications delivering rich color-coded status cards directly to iOS/Android mobile Discord apps when recruiters respond."
+      }
+    ]
+  },
   {
     id: "hsc-ai-system",
     name: "HSC AI Study Intelligence System",
