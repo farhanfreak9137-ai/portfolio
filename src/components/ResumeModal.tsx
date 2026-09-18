@@ -35,10 +35,12 @@ TECHNICAL SKILLS:
 - AI & Tools: Google Gemini API, REST APIs, Git, GitHub, Vite
 
 FEATURED PROJECTS:
-1. Atlas - Personal Productivity OS
+1. Agent HQ - Autonomous Multi-Agent Operations & Orchestration Platform
+   Local-first multi-agent engine with DAG task scheduling, persistent SQLite memory, provider fallback cascade (Gemini, Groq, Antigravity CLI), and automated Gmail outreach CRM.
+2. Atlas - Personal Productivity OS
    Centralized workspace for tasks, habits, goals, and daily planning with Gemini AI task decomposition.
-2. Gym Tracker - Fitness Logger & Analytics
-   Digital workout logger with progressive overload tracking, exercise splits, and rest timer.
+3. HSC AI Study Intelligence System
+   Evidence-based study prioritization and Socratic AI tutoring engine with KaTeX LaTeX math rendering.
     `.trim();
 
     navigator.clipboard.writeText(resumeText);
@@ -206,6 +208,16 @@ FEATURED PROJECTS:
             </div>
 
             <div className="space-y-4">
+              <div className="p-5 rounded-xl bg-zinc-900/60 border border-cyan-500/30 space-y-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-bold text-white">Agent HQ — Autonomous Multi-Agent Operations Platform</h3>
+                  <span className="text-xs font-mono text-cyan-300">React 19 • TypeScript • SQLite • LLM DAG Engine</span>
+                </div>
+                <p className="text-xs text-zinc-300 leading-relaxed">
+                  Local-first multi-agent orchestration engine with DAG task scheduling, persistent SQLite memory, provider fallback cascade (Gemini 2.0 Flash, Groq Llama-3.3, Antigravity CLI), and automated Gmail outreach CRM.
+                </p>
+              </div>
+
               <div className="p-5 rounded-xl bg-zinc-900/60 border border-white/10 space-y-2">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-bold text-white">Atlas — Personal Productivity AI OS</h3>
@@ -225,16 +237,6 @@ FEATURED PROJECTS:
                   Evidence-based study prioritization and Socratic AI tutoring engine for HSC Science. Features board question recurrence scoring, KaTeX LaTeX math preprocessing, model exam generators, and past board question bank.
                 </p>
               </div>
-
-              <div className="p-5 rounded-xl bg-zinc-900/60 border border-white/10 space-y-2">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-bold text-white">Gym Tracker — Fitness & Analytics</h3>
-                  <span className="text-xs font-mono text-zinc-400">React • TypeScript • Tailwind CSS</span>
-                </div>
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  Digital workout logging web application featuring exercise split customization, progressive overload comparisons, rest timers, and volume progress charts.
-                </p>
-              </div>
             </div>
           </div>
 
@@ -249,16 +251,16 @@ FEATURED PROJECTS:
                 Open for contract work, web application builds, dashboard engineering, and AI feature integration.
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 border border-white/10 font-mono">Multi-Agent Systems & DAGs</span>
                 <span className="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 border border-white/10 font-mono">Web Apps & Dashboards</span>
                 <span className="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 border border-white/10 font-mono">AI Feature Integration</span>
-                <span className="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 border border-white/10 font-mono">Figma-to-Code Conversions</span>
               </div>
             </div>
           </div>
 
           {/* Footer note inside resume */}
           <div className="text-center pt-4 border-t border-white/10 text-xs text-zinc-500 font-mono">
-            <span>Portfolio: farhan-dev.app • Email: {personalInfo.email}</span>
+            <span>GitHub: {personalInfo.githubUrl} • Email: {personalInfo.email}</span>
           </div>
 
         </div>

@@ -50,8 +50,7 @@ export const personalInfo: PersonalInfo = {
   location: "Dhaka, Bangladesh",
   availability: "Open for web apps & AI projects",
   email: "farhan.sajid1896@gmail.com",
-  githubUrl: "https://github.com/farhanfreak9137-ai",
-  twitterUrl: "https://x.com"
+  githubUrl: "https://github.com/farhanfreak9137-ai"
 };
 
 // Easy configuration arrays for project assets as requested in Section 7 & Section 20
@@ -154,8 +153,6 @@ export const agentHqScreenshotMetadata = [
   }
 ];
 
-export const atlasDemoVideo = "/projects/atlas/demo.mp4";
-
 export const projects: Project[] = [
   {
     id: "agent-hq",
@@ -183,7 +180,6 @@ export const projects: Project[] = [
     screenshots: agentHqScreenshots,
     screenshotTitles: agentHqScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: agentHqScreenshotMetadata.map(m => m.description),
-    demoVideo: "/projects/agent-hq/demo.mp4",
     liveUrl: "https://github.com/farhanfreak9137-ai/agent-hq",
     githubUrl: "https://github.com/farhanfreak9137-ai/agent-hq",
     isFeatured: true,
@@ -258,7 +254,6 @@ export const projects: Project[] = [
     screenshots: hscAiScreenshots,
     screenshotTitles: hscAiScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: hscAiScreenshotMetadata.map(m => m.description),
-    demoVideo: "/projects/hsc-ai/demo.mp4",
     liveUrl: "https://hsc-ai.vercel.app/",
     githubUrl: "https://github.com/farhanfreak9137-ai",
     isFeatured: true,
@@ -328,7 +323,6 @@ export const projects: Project[] = [
     screenshots: atlasScreenshots,
     screenshotTitles: atlasScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: atlasScreenshotMetadata.map(m => m.description),
-    demoVideo: atlasDemoVideo,
     liveUrl: "https://atlas-aa7q.vercel.app/",
     githubUrl: "https://github.com/farhanfreak9137-ai/Atlas",
     isFeatured: true,
@@ -406,7 +400,6 @@ export const projects: Project[] = [
     screenshots: gymTrackerScreenshots,
     screenshotTitles: gymTrackerScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: gymTrackerScreenshotMetadata.map(m => m.description),
-    demoVideo: "/projects/gym-tracker/demo.mp4",
     liveUrl: "#",
     githubUrl: "#",
     isFeatured: false,
@@ -527,12 +520,13 @@ export const skillGroups: SkillGroup[] = [
     category: "Tools, APIs & AI Integration",
     description: "Development tools, state handling, and intelligent API extensions.",
     skills: [
-      { name: "Vite / Build Tooling" },
+      { name: "Multi-Agent Systems & DAGs", highlight: true },
+      { name: "Google Gemini & LLM APIs", highlight: true },
       { name: "Git & GitHub Workflow", highlight: true },
+      { name: "SQLite & Local-First State" },
       { name: "REST APIs & JSON Services" },
-      { name: "Google Gemini API / LLM SDKs", highlight: true },
-      { name: "State Management & React Context" },
-      { name: "Node.js & Express Basics" }
+      { name: "Node.js & Express" },
+      { name: "Vite / Build Tooling" }
     ]
   }
 ];

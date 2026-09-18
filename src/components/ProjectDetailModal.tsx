@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ExternalLink, Github, Play, CheckCircle2, Sparkles, Layers, ShieldCheck, Video, Layout, Plus, Trash2, Zap, ArrowRight, ChevronLeft, ChevronRight, Smartphone, Maximize2 } from 'lucide-react';
+import { X, ExternalLink, Github, Play, CheckCircle2, Sparkles, Layers, ShieldCheck, Video, Layout, Plus, Trash2, Zap, ArrowRight, ChevronLeft, ChevronRight, Smartphone, Maximize2, Bot, Workflow, Mail, Bell, Terminal, RefreshCw } from 'lucide-react';
 import { Project } from '../types';
 import { ScreenshotLightbox } from './ScreenshotLightbox';
 
@@ -15,6 +15,46 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
   const [activeTab, setActiveTab] = useState<'overview' | 'casestudy' | 'screenshots' | 'video' | 'interactive'>('overview');
   const [selectedScreenshotIndex, setSelectedScreenshotIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  // Interactive Live Workbench State for Agent HQ
+  const [agentHqMissionIndex, setAgentHqMissionIndex] = useState(0);
+  const [agentHqRunning, setAgentHqRunning] = useState(false);
+  const [agentHqStep, setAgentHqStep] = useState(4); // 4 = all stages completed
+
+  const agentHqMissions = [
+    {
+      title: "Outreach Campaign Pipeline",
+      prompt: "Research remote AI engineering roles, match Farhan's profile, stage 20s-paced SMTP outbox with XLSX attachment, and alert Discord on replies.",
+      stages: [
+        { agent: "Boss Commander", role: "Mission Decomposition", provider: "Gemini 2.0 Flash", latency: "142ms", detail: "Decomposed mission into 4 DAG dependency nodes with concurrency limits." },
+        { agent: "Atlas Researcher", role: "Web Intelligence & Scraping", provider: "Groq Llama-3.3", latency: "288ms", detail: "Scraped 5 remote AI opportunities and generated workspace/remote-job-matches.xlsx." },
+        { agent: "Strategist", role: "Profile Matcher & Scoring", provider: "Antigravity CLI", latency: "96ms", detail: "Ranked roles matching Farhan's multi-agent and full-stack expertise." },
+        { agent: "Outreach Agent", role: "Gmail SMTP & CRM Outbox", provider: "Nodemailer", latency: "64ms", detail: "Staged 5 personalized applications with 20s anti-spam delivery pacing." },
+        { agent: "Discord Alert", role: "Mobile Push Notification", provider: "Discord Webhook", latency: "38ms", detail: "Dispatched formatted status embed card directly to Farhan's mobile device." }
+      ]
+    },
+    {
+      title: "Repository Architectural & Security Audit",
+      prompt: "Perform deep modular analysis, check provider failover cascades, verify zero CVEs, and confirm SQLite WAL transactional safety.",
+      stages: [
+        { agent: "Boss Commander", role: "Mission Decomposition", provider: "Gemini 2.0 Flash", latency: "110ms", detail: "Spawned security and architectural audit sub-tasks with strict isolated context." },
+        { agent: "Sentinel", role: "Vulnerability & Secret Scanner", provider: "AST Scanner", latency: "195ms", detail: "Verified zero credential leaks in git history; all API keys masked with asterisks." },
+        { agent: "Atlas", role: "Dependency Topology Analyzer", provider: "Node.js AST", latency: "220ms", detail: "Mapped all 9 system modules; verified circular dependency index is 0.00%." }
+      ]
+    }
+  ];
+
+  const handleRunAgentHqMission = () => {
+    setAgentHqRunning(true);
+    setAgentHqStep(0);
+    setTimeout(() => setAgentHqStep(1), 400);
+    setTimeout(() => setAgentHqStep(2), 900);
+    setTimeout(() => setAgentHqStep(3), 1400);
+    setTimeout(() => {
+      setAgentHqStep(4);
+      setAgentHqRunning(false);
+    }, 1900);
+  };
 
   // Interactive Live Workbench State for Atlas
   const [sampleTasks, setSampleTasks] = useState([
@@ -39,6 +79,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
   ]);
 
   if (!isOpen || !project) return null;
+
+  const hasInteractiveDemo = ['agent-hq', 'atlas', 'hsc-ai-system', 'gym-tracker'].includes(project.id);
 
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,17 +193,19 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                 <span>Demo Video</span>
               </button>
             )}
-            <button
-              onClick={() => setActiveTab('interactive')}
-              className={`py-3 px-4 border-b-2 transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer ${
-                activeTab === 'interactive'
-                  ? 'border-[#4DA3FF] text-[#4DA3FF] font-semibold'
-                  : 'border-transparent hover:text-white'
-              }`}
-            >
-              <Sparkles className="w-4 h-4 text-[#4DA3FF]" />
-              <span>Interactive Live Demo</span>
-            </button>
+            {hasInteractiveDemo && (
+              <button
+                onClick={() => setActiveTab('interactive')}
+                className={`py-3 px-4 border-b-2 transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer ${
+                  activeTab === 'interactive'
+                    ? 'border-[#4DA3FF] text-[#4DA3FF] font-semibold'
+                    : 'border-transparent hover:text-white'
+                }`}
+              >
+                <Sparkles className="w-4 h-4 text-[#4DA3FF]" />
+                <span>Interactive Live Demo</span>
+              </button>
+            )}
           </div>
 
           {/* Modal Content Body */}
@@ -511,7 +555,127 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                   </span>
                 </div>
 
-                {project.id === 'hsc-ai-system' ? (
+                {project.id === 'agent-hq' ? (
+                  /* Agent HQ Autonomous Multi-Agent DAG Simulation */
+                  <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 gap-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                            Multi-Agent Execution Engine
+                          </span>
+                          <h4 className="text-base font-bold text-white">Autonomous DAG Scheduler &amp; Event Stream</h4>
+                        </div>
+                        <p className="text-xs text-zinc-400 mt-1">
+                          Test Boss mission decomposition, multi-agent delegation, and provider cascade execution.
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={handleRunAgentHqMission}
+                        disabled={agentHqRunning}
+                        className="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-xs flex items-center gap-2 transition-all shadow-lg disabled:opacity-50 cursor-pointer self-start sm:self-auto"
+                      >
+                        {agentHqRunning ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
+                        <span>{agentHqRunning ? "Executing DAG..." : "Run Mission DAG"}</span>
+                      </button>
+                    </div>
+
+                    {/* Mission Selector */}
+                    <div className="space-y-2">
+                      <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">
+                        Select Mission Scenario:
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {agentHqMissions.map((m, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => {
+                              setAgentHqMissionIndex(idx);
+                              setAgentHqStep(4);
+                            }}
+                            className={`p-3 rounded-xl border text-left transition-all text-xs cursor-pointer ${
+                              agentHqMissionIndex === idx
+                                ? 'bg-cyan-500/20 text-white border-cyan-500/50 shadow-sm'
+                                : 'bg-zinc-950/60 text-zinc-400 border-white/5 hover:border-white/20 hover:text-zinc-200'
+                            }`}
+                          >
+                            <div className="font-semibold text-white">{m.title}</div>
+                            <div className="text-[11px] text-zinc-400 mt-1 line-clamp-2">{m.prompt}</div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Live Execution Pipeline */}
+                    <div className="space-y-3 pt-2">
+                      <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+                        <span>Topological DAG Execution Pipeline:</span>
+                        <span className="text-cyan-400 font-semibold">
+                          {agentHqRunning ? "Running..." : "Pipeline Ready"}
+                        </span>
+                      </div>
+
+                      <div className="space-y-2.5">
+                        {agentHqMissions[agentHqMissionIndex].stages.map((stage, idx) => {
+                          const isDone = agentHqStep >= idx;
+                          const isCurrent = agentHqStep === idx && agentHqRunning;
+
+                          return (
+                            <div
+                              key={idx}
+                              className={`p-3.5 rounded-xl border transition-all ${
+                                isDone
+                                  ? 'bg-zinc-950 border-cyan-500/30'
+                                  : 'bg-zinc-950/40 border-white/5 opacity-50'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2.5">
+                                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
+                                    isDone ? 'bg-cyan-500/20 text-cyan-300' : 'bg-zinc-800 text-zinc-500'
+                                  }`}>
+                                    {idx + 1}
+                                  </div>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-xs font-semibold text-white">{stage.agent}</span>
+                                      <span className="text-[10px] font-mono text-zinc-400">({stage.role})</span>
+                                    </div>
+                                    <p className="text-[11px] text-zinc-400 mt-0.5">{stage.detail}</p>
+                                  </div>
+                                </div>
+
+                                <div className="text-right shrink-0">
+                                  <div className="flex items-center justify-end gap-1.5">
+                                    <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-900 border border-white/10 text-zinc-300">
+                                      {stage.provider}
+                                    </span>
+                                    <span className="text-[10px] font-mono text-cyan-400 font-semibold">
+                                      {stage.latency}
+                                    </span>
+                                  </div>
+                                  <div className="text-[10px] font-mono mt-1">
+                                    {isDone ? (
+                                      <span className="text-emerald-400 font-medium flex items-center justify-end gap-1">
+                                        <CheckCircle2 className="w-3 h-3" />
+                                        Completed
+                                      </span>
+                                    ) : isCurrent ? (
+                                      <span className="text-cyan-400 font-medium animate-pulse">Running</span>
+                                    ) : (
+                                      <span className="text-zinc-500">Pending</span>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                ) : project.id === 'hsc-ai-system' ? (
                   /* HSC AI Study Intelligence Interactive Sandbox */
                   <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 gap-3">
@@ -758,13 +922,13 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                       ))}
                     </div>
                   </div>
-                ) : (
+                ) : project.id === 'gym-tracker' ? (
                   /* Gym Tracker Interactive Demo */
                   <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
                     <div className="flex items-center justify-between border-b border-white/10 pb-4">
                       <div>
                         <h4 className="text-base font-bold text-white">Gym Tracker Live Workout Set Logger</h4>
-                        <p className="text-xs text-zinc-400">Interactive set & rep logging with live overload volume calculation</p>
+                        <p className="text-xs text-zinc-400">Interactive set and rep logging with live overload volume calculation</p>
                       </div>
                     </div>
 
@@ -798,7 +962,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                       ))}
                     </div>
                   </div>
-                )}
+                ) : null}
               </div>
             )}
           </div>

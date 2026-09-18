@@ -47,8 +47,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenResume }) => {
     },
     {
       label: "Specialization",
-      value: "Productivity & AI Tools",
-      sub: "Atlas & HSC AI System",
+      value: "Agent Engines & AI Tools",
+      sub: "Agent HQ • Atlas • HSC AI",
       icon: Sparkles
     },
     {

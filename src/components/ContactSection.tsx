@@ -29,7 +29,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
       try {
         await fetch(customEndpoint, {
           method: 'POST',
-          headers: { 'Content-[#Type]': 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
       } catch (err) {
