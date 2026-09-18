@@ -59,8 +59,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
     setTimeout(() => {
       setSampleTasks([
         ...sampleTasks,
-        { id: Date.now() + 1, text: "⚡ AI Subtask 1: Define clear priority metrics", done: false, tag: "AI Generated" },
-        { id: Date.now() + 2, text: "⚡ AI Subtask 2: Schedule 45-min focus block", done: false, tag: "AI Generated" },
+        { id: Date.now() + 1, text: "AI Subtask 1: Define clear priority metrics", done: false, tag: "AI Generated" },
+        { id: Date.now() + 2, text: "AI Subtask 2: Schedule 45-min focus block", done: false, tag: "AI Generated" },
       ]);
       setAiDecomposing(false);
     }, 1200);
@@ -539,7 +539,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                         className="px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-xs flex items-center gap-2 transition-all shadow-lg disabled:opacity-50 cursor-pointer self-start sm:self-auto"
                       >
                         <Zap className="w-3.5 h-3.5" />
-                        <span>{hscAiSimulating ? 'Socratic Reasoning...' : hscRevealedStep >= 3 ? 'Solution Complete ✓' : 'Next Socratic Step →'}</span>
+                        <span>{hscAiSimulating ? 'Socratic Reasoning...' : hscRevealedStep >= 3 ? 'Solution Complete' : 'Next Socratic Step'}</span>
                       </button>
                     </div>
 
@@ -609,8 +609,8 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                           </div>
                           <p className="text-xs text-indigo-200 leading-relaxed">
                             {hscWeaknessIndex >= 50
-                              ? "⚠️ High Priority: High board frequency paired with unmastered concept."
-                              : "✓ Moderate Priority: Good baseline grasp; schedule periodic revision."}
+                              ? "High Priority: High board frequency paired with unmastered concept."
+                              : "Moderate Priority: Good baseline grasp; schedule periodic revision."}
                           </p>
                         </div>
 
@@ -792,7 +792,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                                 : 'bg-zinc-800 text-zinc-400 hover:text-white'
                             }`}
                           >
-                            {s.completed ? 'Completed ✓' : 'Mark Done'}
+                            {s.completed ? 'Completed' : 'Mark Done'}
                           </button>
                         </div>
                       ))}

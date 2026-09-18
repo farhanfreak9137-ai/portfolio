@@ -816,19 +816,19 @@ export function preprocessMathText(rawText: string): string {
             <div className="p-4 rounded-2xl bg-zinc-950 border border-white/10 space-y-2">
               <span className="text-xs font-mono text-indigo-400 font-bold block">Phase 1: Foundation</span>
               <p className="text-xs text-zinc-300">Curriculum graph formalization, KaTeX math preprocessor, and React 19 UI setup.</p>
-              <span className="text-[10px] font-mono text-emerald-400">Completed ✓</span>
+              <span className="text-[10px] font-mono text-emerald-400">Completed</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-zinc-950 border border-white/10 space-y-2">
               <span className="text-xs font-mono text-indigo-400 font-bold block">Phase 2: Intelligence</span>
               <p className="text-xs text-zinc-300">Socratic prompt orchestration, Zod schema contracts, and physics validator.</p>
-              <span className="text-[10px] font-mono text-emerald-400">Completed ✓</span>
+              <span className="text-[10px] font-mono text-emerald-400">Completed</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-zinc-950 border border-white/10 space-y-2">
               <span className="text-xs font-mono text-indigo-400 font-bold block">Phase 3: Examination Hub</span>
               <p className="text-xs text-zinc-300">All-Board Question Bank, timed exam simulator, and mistake vault classification.</p>
-              <span className="text-[10px] font-mono text-emerald-400">Completed ✓</span>
+              <span className="text-[10px] font-mono text-emerald-400">Completed</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-zinc-950 border border-white/10 space-y-2">

@@ -281,7 +281,7 @@ public class AtlasPhoneControlPlugin extends Plugin {
                   <Brain className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">🤖 A. Personal AI Companion ("Atlas AI")</h3>
+                  <h3 className="text-xl font-bold text-white">A. Personal AI Companion ("Atlas AI")</h3>
                   <p className="text-xs text-zinc-400">Intelligent life assistant with dynamic profile context ingestion</p>
                 </div>
               </div>
@@ -322,7 +322,7 @@ public class AtlasPhoneControlPlugin extends Plugin {
                   <Camera className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">🏋️ B. Physical Screen Time Enforcement & AI Motion Tracking</h3>
+                  <h3 className="text-xl font-bold text-white">B. Physical Screen Time Enforcement & AI Motion Tracking</h3>
                   <p className="text-xs text-zinc-400">Hardware-level app locking unlocked via computer vision exercise verification</p>
                 </div>
               </div>
@@ -361,7 +361,7 @@ public class AtlasPhoneControlPlugin extends Plugin {
                   <Layers className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">📊 C. Unified Life Management Modules</h3>
+                  <h3 className="text-xl font-bold text-white">C. Unified Life Management Modules</h3>
                   <p className="text-xs text-zinc-400">Integrated suite of daily tracking and productivity tools</p>
                 </div>
               </div>
