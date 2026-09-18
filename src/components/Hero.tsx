@@ -9,7 +9,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenResume }) => {
   const [copiedCode, setCopiedCode] = useState(false);
-  const [activeCodeTab, setActiveCodeTab] = useState<'agent-hq' | 'config' | 'atlas' | 'hsc' | 'stack'>('agent-hq');
+  const [activeCodeTab, setActiveCodeTab] = useState<'agent-hq' | 'auren' | 'config' | 'atlas' | 'hsc' | 'stack'>('agent-hq');
 
   const codeSnippets = {
     'agent-hq': `// AgentHQOrchestrator.ts
@@ -26,6 +26,22 @@ export async function executeMission(prompt: string) {
   });
 
   return SQLiteStorage.saveRun({ mission: prompt, stream });
+}`,
+        auren: `// AurenCareerOS.ts
+import { CentralAssistant, AgentRegistry, PolicyBoundary } from '@/auren';
+
+export async function processCareerIntent(query: string) {
+  // 1. Parse intent & resolve from dynamic registry
+  const intent = await CentralAssistant.parse(query);
+  const tool = AgentRegistry.resolve(intent.action);
+
+  // 2. Halt at server policy gate if mutation requires human approval
+  if (tool.requiresHumanApproval) {
+    return PolicyBoundary.requestApproval({ tool, payload: intent.args });
+  }
+
+  // 3. Execute with strict SQLite verified memory grounding
+  return tool.execute({ grounding: "VERIFIED_MEMORY" });
 }`,
     config: `// farhan.config.ts
 export const developer = {
@@ -221,6 +237,16 @@ export const coreSkills = [
                   }`}
                 >
                   AgentHQ.ts
+                </button>
+                                <button
+                  onClick={() => setActiveCodeTab('auren')}
+                  className={`px-3 py-1.5 rounded-t-lg transition-colors cursor-pointer ${
+                    activeCodeTab === 'auren'
+                      ? 'bg-zinc-900 text-indigo-400 border-t-2 border-indigo-400'
+                      : 'text-zinc-500 hover:text-zinc-300'
+                  }`}
+                >
+                  auren.ts
                 </button>
                 <button
                   onClick={() => setActiveCodeTab('config')}

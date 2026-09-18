@@ -12,6 +12,7 @@ import { ResumeModal } from './components/ResumeModal';
 import { AtlasCaseStudyPage } from './components/AtlasCaseStudyPage';
 import { HscAiCaseStudyPage } from './components/HscAiCaseStudyPage';
 import { AgentHqCaseStudyPage } from './components/AgentHqCaseStudyPage';
+import { AurenCaseStudyPage } from './components/AurenCaseStudyPage';
 import { Project } from './types';
 
 export default function App() {
@@ -19,12 +20,15 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<'portfolio' | 'atlas-case-study' | 'hsc-ai-case-study' | 'agent-hq-case-study'>('portfolio');
+  const [viewMode, setViewMode] = useState<'portfolio' | 'agent-hq-case-study' | 'auren-case-study' | 'atlas-case-study' | 'hsc-ai-case-study'>('portfolio');
 
   useEffect(() => {
     const handleHashChange = () => {
       if (window.location.hash === '#agent-hq-case-study') {
         setViewMode('agent-hq-case-study');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (window.location.hash === '#auren-case-study') {
+        setViewMode('auren-case-study');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (window.location.hash === '#atlas-case-study') {
         setViewMode('atlas-case-study');
@@ -106,6 +110,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenAurenCaseStudy = () => {
+    setIsModalOpen(false);
+    setViewMode('auren-case-study');
+    window.location.hash = 'auren-case-study';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleOpenAtlasCaseStudy = () => {
     setIsModalOpen(false);
     setViewMode('atlas-case-study');
@@ -127,6 +138,20 @@ export default function App() {
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (viewMode === 'auren-case-study') {
+    return (
+      <div className="min-h-screen bg-[#07080c] text-neutral-100 selection:bg-cyan-400 selection:text-black">
+        <Navbar activeSection="work" onNavigate={handleNavigate} onOpenResume={handleOpenResume} />
+        <AurenCaseStudyPage onBack={handleBackToPortfolio} />
+        <Footer onNavigate={handleNavigate} />
+        <ResumeModal
+          isOpen={isResumeModalOpen}
+          onClose={() => setIsResumeModalOpen(false)}
+        />
+      </div>
+    );
+  }
 
   if (viewMode === 'agent-hq-case-study') {
     return (
@@ -181,6 +206,7 @@ export default function App() {
         <SelectedWork
           onSelectProject={handleOpenProjectModal}
           onOpenAgentHqCaseStudy={handleOpenAgentHqCaseStudy}
+          onOpenAurenCaseStudy={handleOpenAurenCaseStudy}
           onOpenAtlasCaseStudy={handleOpenAtlasCaseStudy}
           onOpenHscCaseStudy={handleOpenHscCaseStudy}
         />
@@ -199,6 +225,7 @@ export default function App() {
         isOpen={isModalOpen}
         onClose={handleCloseProjectModal}
         onOpenAgentHqCaseStudy={handleOpenAgentHqCaseStudy}
+        onOpenAurenCaseStudy={handleOpenAurenCaseStudy}
         onOpenAtlasCaseStudy={handleOpenAtlasCaseStudy}
         onOpenHscCaseStudy={handleOpenHscCaseStudy}
       />

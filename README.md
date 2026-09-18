@@ -16,7 +16,18 @@
 
 ## 🚀 Projects & Case Studies Featured
 
-### 1. HSC AI Study Intelligence System (Flagship Case Study)
+### 1. Agent HQ — Autonomous Multi-Agent Orchestration & Operations Platform
+A high-throughput, local-first multi-agent operating engine with Directed Acyclic Graph (DAG) scheduling, persistent SQLite WAL memory, multi-provider fallback cascade (Gemini, Groq, OpenAI, Antigravity CLI), and cold Gmail outreach with Discord mobile alerts.
+- **Full-Page Interactive Case Study:** [/#agent-hq-case-study](https://hsc-ai.vercel.app/#agent-hq-case-study)
+- **Repository:** [github.com/farhanfreak9137-ai/agent-hq](https://github.com/farhanfreak9137-ai/agent-hq)
+
+### 2. Auren — Personal AI Career Operating System & Desktop Copilot
+A production-grade personal career operating system engineered on Next.js 16 App Router (Node.js runtime), SQLite/libsql, and Drizzle ORM. Consolidates 9 unified workspaces, dynamic tool orchestration, audited Playwright browser control with SSRF protection, 8-category verified SQLite personal memory, and voice synthesis.
+- **Full-Page Interactive Case Study:** [/#auren-case-study](https://hsc-ai.vercel.app/#auren-case-study)
+- **Repository:** [github.com/farhanfreak9137-ai/farhan-ai](https://github.com/farhanfreak9137-ai/farhan-ai)
+
+### 3. HSC AI Study Intelligence System
+
 An evidence-based adaptive learning, question pattern intelligence, and multi-modal assessment platform engineered specifically for the Bangladesh Higher Secondary Certificate (HSC/NCTB) curriculum.
 - **Full-Page Interactive Case Study:** [/#hsc-ai-case-study](https://hsc-ai.vercel.app/#hsc-ai-case-study)
 - **Technical Whitepapers Included in Repo:**
@@ -28,11 +39,11 @@ An evidence-based adaptive learning, question pattern intelligence, and multi-mo
   - [`hsc_ai_evaluation_framework.md`](./hsc_ai_evaluation_framework.md) — 14 Student-Led Experimental Protocols
   - [`hsc_ai_adversarial_fact_check.md`](./hsc_ai_adversarial_fact_check.md) — Claim Verifications & Interview Defense
 
-### 2. Atlas — Daily Operations & Habit OS
+### 4. Atlas — Daily Operations & Habit OS
 Personal productivity dashboard featuring quarterly goal planning, habit streak tracking, and subtask decomposition.
 - **Interactive Case Study:** [/#atlas-case-study](https://hsc-ai.vercel.app/#atlas-case-study)
 
-### 3. Gym Tracker & Workout Analytics
+### 5. Gym Tracker & Workout Analytics
 High-performance progressive overload logger, 1RM calculator, and workout split planner.
 
 ---

@@ -6,17 +6,20 @@ import { Project } from '../types';
 interface SelectedWorkProps {
   onSelectProject: (project: Project) => void;
   onOpenAgentHqCaseStudy?: () => void;
+  onOpenAurenCaseStudy?: () => void;
   onOpenAtlasCaseStudy?: () => void;
   onOpenHscCaseStudy?: () => void;
 }
 
-export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onOpenAgentHqCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
+export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onOpenAgentHqCaseStudy, onOpenAurenCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
   const agentHqProject = projects.find(p => p.id === 'agent-hq') || projects[0];
-  const atlasProject = projects.find(p => p.id === 'atlas') || projects[1];
-  const hscProject = projects.find(p => p.id === 'hsc-ai-system') || projects[2];
-  const gymProject = projects.find(p => p.id === 'gym-tracker') || projects[3];
+  const aurenProject = projects.find(p => p.id === 'auren') || projects[1];
+  const atlasProject = projects.find(p => p.id === 'atlas') || projects[2];
+  const hscProject = projects.find(p => p.id === 'hsc-ai-system') || projects[3];
+  const gymProject = projects.find(p => p.id === 'gym-tracker') || projects[4];
 
   const [activeAgentHqScreenshotIndex, setActiveAgentHqScreenshotIndex] = useState(0);
+  const [activeAurenScreenshotIndex, setActiveAurenScreenshotIndex] = useState(0);
   const [activeAtlasScreenshotIndex, setActiveAtlasScreenshotIndex] = useState(0);
   const [activeHscScreenshotIndex, setActiveHscScreenshotIndex] = useState(0);
 
@@ -210,7 +213,184 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
           </div>
         </div>
 
-        {/* 2. ATLAS FEATURED SHOWCASE */}
+        
+        {/* 2. AUREN CAREER OPERATING SYSTEM SHOWCASE */}
+        <div className="relative rounded-3xl bg-zinc-900/40 border border-indigo-500/20 hover:border-indigo-500/40 transition-all shadow-2xl overflow-hidden group">
+          {/* Subtle accent glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 blur-[130px] rounded-full pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 lg:p-12 items-center">
+            
+            {/* Left Info Column */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <div className="flex items-center gap-3">
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+                  {aurenProject.category}
+                </span>
+                <span className="text-xs text-cyan-400 font-mono font-medium flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  Flagship Career OS
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
+                  {aurenProject.name}
+                </h3>
+                <p className="text-zinc-300 font-medium text-sm sm:text-base">
+                  {aurenProject.tagline}
+                </p>
+              </div>
+
+              <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+                {aurenProject.description}
+              </p>
+
+              {/* System Architecture Highlights */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-indigo-300 font-semibold">
+                    <Layers className="w-3.5 h-3.5" />
+                    <span>9 Workspaces</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Assistant, Opportunities, Career, Knowledge, Computer, Voice, Automation, Activity, Settings.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-indigo-300 font-semibold">
+                    <Bot className="w-3.5 h-3.5" />
+                    <span>Dynamic Agent Registry</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Zod schema validation, intent parsing & cryptographic human approval tokens.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-indigo-300 font-semibold">
+                    <ShieldAlert className="w-3.5 h-3.5" />
+                    <span>Playwright SSRF Sandbox</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Strict domain allowlists, loopback IP blocking & hardware Emergency STOP.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-indigo-300 font-semibold">
+                    <Database className="w-3.5 h-3.5" />
+                    <span>Grounded SQLite Memory</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    6-tier source provenance ([VERIFIED_MEMORY]) & zero hallucination guarantees.
+                  </p>
+                </div>
+              </div>
+
+              {/* Technology Tags */}
+              <div className="space-y-2 pt-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">
+                  Technologies
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {aurenProject.technologies.slice(0, 8).map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-300 font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {aurenProject.technologies.length > 8 && (
+                    <span className="px-2.5 py-1 rounded-lg bg-zinc-900/60 border border-white/5 text-xs text-zinc-400 font-mono">
+                      +{aurenProject.technologies.length - 8} more
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                {onOpenAurenCaseStudy && (
+                  <button
+                    onClick={onOpenAurenCaseStudy}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-sm transition-all shadow-md shadow-indigo-500/20 active:scale-95 cursor-pointer"
+                  >
+                    <span>Explore Full Case Study</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
+
+                <button
+                  onClick={() => onSelectProject(aurenProject)}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white font-semibold text-sm border border-white/10 transition-all active:scale-95 cursor-pointer"
+                >
+                  <Bot className="w-4 h-4 text-indigo-400" />
+                  <span>Interactive Live Demo</span>
+                </button>
+
+                {aurenProject.githubUrl && (
+                  <a
+                    href={aurenProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white font-semibold text-sm border border-white/10 transition-all cursor-pointer"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Right Interactive Visual Column */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl group">
+                <img
+                  src={aurenProject.screenshots[activeAurenScreenshotIndex] || aurenProject.screenshots[0]}
+                  alt="Auren Screenshot"
+                  className="w-full h-auto object-cover max-h-[440px] transition-transform duration-500 group-hover:scale-[1.01]"
+                />
+
+                {/* Screenshot caption overlay */}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/80 to-transparent p-4 text-left">
+                  <p className="text-xs font-mono font-semibold text-indigo-300">
+                    {aurenProject.screenshotTitles?.[activeAurenScreenshotIndex] || "Auren Operating Workspace"}
+                  </p>
+                  <p className="text-[11px] text-zinc-300 mt-0.5 line-clamp-2 font-normal">
+                    {aurenProject.screenshotDescriptions?.[activeAurenScreenshotIndex]}
+                  </p>
+                </div>
+              </div>
+
+              {/* Screenshot Selector Buttons */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                {aurenProject.screenshots.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveAurenScreenshotIndex(idx)}
+                    className={`px-2 py-2 rounded-xl border text-center transition-all text-xs font-mono cursor-pointer ${
+                      activeAurenScreenshotIndex === idx
+                        ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/50 font-bold shadow-sm'
+                        : 'bg-zinc-900/60 text-zinc-400 border-white/5 hover:border-white/15 hover:text-white'
+                    }`}
+                  >
+                    {idx === 0 ? "1. Assistant" : 
+                     idx === 1 ? "2. Career" : 
+                     idx === 2 ? "3. Opps" : 
+                     idx === 3 ? "4. Computer" : 
+                     idx === 4 ? "5. RAG" : "6. Voice"}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* 3. ATLAS FEATURED SHOWCASE */}
         <div className="relative rounded-3xl bg-zinc-900/40 border border-white/10 hover:border-[#4DA3FF]/30 transition-all shadow-2xl overflow-hidden group">
           {/* Subtle accent glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#4DA3FF]/10 blur-[120px] rounded-full pointer-events-none" />

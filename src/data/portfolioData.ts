@@ -16,6 +16,13 @@ import agentHqCanvasImg from '../assets/images/agent_hq_workspace_canvas.png';
 import agentHqEmailCrmImg from '../assets/images/agent_hq_email_crm_modal.png';
 import agentHqWorkbenchImg from '../assets/images/agent_hq_crm_workbench.png';
 import agentHqProfileImg from '../assets/images/agent_hq_profile_outreach_config.png';
+import aurenChatAssistantImg from '../assets/images/auren_chat_assistant.png';
+import aurenCareerCommandImg from '../assets/images/auren_career_command.png';
+import aurenOpportunitiesImg from '../assets/images/auren_opportunities_matcher.png';
+import aurenComputerControlImg from '../assets/images/auren_computer_control.png';
+import aurenKnowledgeRagImg from '../assets/images/auren_knowledge_rag.png';
+import aurenVoiceInterfaceImg from '../assets/images/auren_voice_interface.png';
+
 
 export const personalInfo: PersonalInfo = {
   name: "Md Farhan Hossain",
@@ -27,7 +34,7 @@ export const personalInfo: PersonalInfo = {
   bioHeading: "Crafting modern web applications & AI tools with speed and precision.",
   bioParagraphs: [
     "I'm Md Farhan Hossain, a frontend developer and AI builder based in Dhaka, Bangladesh. With a solid academic foundation in Science from MDC Model Institute (SSC 2025) and Milestone College (Science Stream), I bridge computational foundations with modern, hands-on web application development.",
-    "My journey in code gained momentum when I embraced Artificial Intelligence as a force-multiplier in software engineering. What began as curiosity quickly grew into constructing full-featured, real-world tools—from autonomous multi-agent orchestration engines (Agent HQ) to personal productivity operating systems (Atlas) and curriculum-grounded study intelligence platforms (HSC AI System).",
+    "My journey in code gained momentum when I embraced Artificial Intelligence as a force-multiplier in software engineering. What began as curiosity quickly grew into constructing full-featured, real-world tools—from autonomous multi-agent orchestration engines (Agent HQ) and personal career operating systems (Auren) to daily productivity operating systems (Atlas) and curriculum-grounded study intelligence platforms (HSC AI System).",
     "I specialize in building highly responsive user interfaces using React, Next.js, TypeScript, and Tailwind CSS, coupled with intelligent AI features using the Google Gemini API. I focus on sub-100ms state updates, modular architecture, clean typography, and zero visual bloat.",
     "Whether architecting interactive dashboards or crafting custom workflows, my focus remains constant: converting complex user problems into elegant, production-ready software experiences."
   ],
@@ -153,6 +160,42 @@ export const agentHqScreenshotMetadata = [
   }
 ];
 
+export const aurenScreenshots = [
+  aurenChatAssistantImg,
+  aurenCareerCommandImg,
+  aurenOpportunitiesImg,
+  aurenComputerControlImg,
+  aurenKnowledgeRagImg,
+  aurenVoiceInterfaceImg,
+];
+
+export const aurenScreenshotMetadata = [
+  {
+    title: "1. Central Assistant & Source Provenance",
+    description: "Central conversational copilot orchestrating native tools with strict source classifications ([PERSONAL_KNOWLEDGE], [VERIFIED_MEMORY], [LIVE_RESEARCH], [UNKNOWN]) and anti-hallucination boundaries."
+  },
+  {
+    title: "2. Career Command Center & Pipelines",
+    description: "Autonomous multi-step career workflows (discovery, opportunity analysis, proposal prep), persistent SQLite state checkpoints, and 6-stage Kanban board tracker."
+  },
+  {
+    title: "3. Opportunity Discovery & Match Scoring",
+    description: "Real-time opportunity analysis with deterministic match scoring (0–100%), verified vs. missing capability breakdowns, and Skill Gap Studio learning roadmaps."
+  },
+  {
+    title: "4. Audited Browser Automation & SSRF Sandbox",
+    description: "Playwright-powered computer control with strict domain allowlists, private IP loopback blocking, interactive human action approval cards, and hardware emergency STOP."
+  },
+  {
+    title: "5. Knowledge Base & Personal Memory RAG",
+    description: "Dual-tier knowledge architecture: multi-format document parser (.pdf, .txt, .md, .json) with vector cosine similarity retrieval and 8-category verified SQLite personal memory."
+  },
+  {
+    title: "6. Real-Time Voice Interface & Speech Safety",
+    description: "Streaming voice interaction pipeline (STT → Central Assistant → Policy Boundary → TTS) with provider state validation (REAL, MOCK, UNAVAILABLE) and single-approval safety rules."
+  }
+];
+
 export const projects: Project[] = [
   {
     id: "agent-hq",
@@ -242,6 +285,104 @@ export const projects: Project[] = [
       }
     ]
   },
+  {
+    id: "auren",
+    name: "Auren",
+    category: "Personal AI Career Operating System & Desktop Copilot",
+    tagline: "Autonomous career copilot with 9 unified workspaces, audited browser control, strict anti-hallucination grounding, and real-time voice interaction.",
+    description: "A production-grade personal career operating system and autonomous desktop copilot engineered on Next.js 16 App Router (Node.js runtime), SQLite/libsql, and Drizzle ORM. Features 9 unified workspaces, dynamic multi-agent tool registry, audited Playwright browser automation with SSRF safeguards, RAG document embeddings, 8-category verified personal memory, real-time voice interaction, and immutable cryptographic human approval boundaries.",
+    problem: "Job seekers and professionals face fragmented career workflows: disconnected job portals, manual resume tailoring prone to hallucinations, lack of verifiable audit trails, insecure browser automation scripts that leak credentials, and ungrounded LLMs fabricating candidate qualifications.",
+    solution: "Engineered Auren as an enterprise-grade personal operating system that unifies job discovery, autonomous application pipelines, audited browser automation with strict domain allowlists, dual-tier RAG & SQLite personal memory with strict source provenance, and an emergency stop safeguard for computer control.",
+    technologies: [
+      "Next.js 16 (App Router)",
+      "React 19",
+      "TypeScript",
+      "libsql / SQLite (WAL)",
+      "Drizzle ORM",
+      "Playwright Automation",
+      "Google Gemini 2.5 Flash",
+      "OpenAI API",
+      "Tailwind CSS",
+      "Zod Schema Validation",
+      "Web Speech / Voice Audio",
+      "Node.js Runtime"
+    ],
+    screenshots: aurenScreenshots,
+    screenshotTitles: aurenScreenshotMetadata.map(m => m.title),
+    screenshotDescriptions: aurenScreenshotMetadata.map(m => m.description),
+    liveUrl: "http://localhost:3000",
+    githubUrl: "https://github.com/farhanfreak9137-ai/farhan-ai",
+    isFeatured: true,
+    caseStudy: {
+      architectureOverview: "Auren is architected on Next.js 16 App Router (Node.js runtime) using a decoupled multi-agent orchestration design: a 9-workspace client shell communicating over REST and typed server actions with the Central Assistant. The backend orchestrates a dynamic Agent Registry with Zod schema validation, a server-side policy engine, persistent WAL-mode SQLite storage via Drizzle ORM, dual-tier RAG document vector search, audited Playwright browser automation, and immutable audit logging.",
+      componentHierarchy: [
+        "ProductShell (9 Unified Workspaces: Assistant, Opportunities, Career, Knowledge, Computer, Voice, Automation, Activity, Settings)",
+        "CentralAssistant (Intent Parsing, Standard Tool Calling & Source Grounding Classifier)",
+        "DynamicAgentRegistry (Typed Tool Registry, Zod Validation, Human Approval Flags & Context Injection)",
+        "AutonomousWorkflowEngine (State Machine Pipelines: Discovery, Analysis, Application Prep with SQLite Checkpointing)",
+        "ComputerControlSandbox (Playwright Browser Bridge, Strict Domain Allowlists, SSRF Defense & Emergency STOP)",
+        "KnowledgeRAGHub (Multi-Format Document Parsing, Semantic Vector Embeddings & 8-Category Verified Memory)",
+        "VoicePipeline (Streaming Speech Recognition, Assistant Bridge, Synthesizer & Approval Safety Guardrails)",
+        "BackgroundCronEngine (Automated Daily Opportunity Scans, Market Intelligence & Stale App Monitor)",
+        "ImmutableAuditLedger (Cryptographic Approval Tokens, Subsystem Telemetry & Tamper-Proof Audit Logs)"
+      ],
+      stateStrategy: "Uses persistent SQLite (WAL mode) with Drizzle ORM for atomic workflow checkpointing, verified memory records, and immutable audit logs. Employs optimistic UI state synchronization on the client with server-validated cryptographic approval tokens for all mutating operations.",
+      technicalChallenges: [
+        {
+          challenge: "Eliminating model hallucinations and preventing unverified personal qualifications from being asserted or submitted to external employers.",
+          solution: "Enforced strict server-side source provenance classifying all factual assertions into 6 deterministic tiers ([PERSONAL_KNOWLEDGE], [VERIFIED_MEMORY], [LIVE_RESEARCH], [MODEL_KNOWLEDGE], [INFERENCE], [UNKNOWN]). Missing credentials return UNKNOWN and are prohibited from being passed to browser mutation agents."
+        },
+        {
+          challenge: "Preventing SSRF attacks and credential leaks during autonomous browser navigation on third-party job boards.",
+          solution: "Engineered a hardened Playwright sandbox enforcing strict domain allowlists, rejecting private IP ranges (RFC 1918) and loopback addresses, stripping session secrets, and requiring interactive human approval cards before clicking submit or typing inputs."
+        },
+        {
+          challenge: "Guaranteeing multi-step career workflow resumption without duplicate side-effects during server restarts or network drops.",
+          solution: "Implemented an idempotent state-machine checkpointing engine committing step state to SQLite after every transition, allowing automatic resumption from the latest verified checkpoint without re-executing completed idempotent steps."
+        }
+      ],
+      outcomes: [
+        "Complete 9-workspace personal career operating system with 10 production-tested user journeys.",
+        "Zero-hallucination guarantee backed by strict SQLite personal memory groundings and source provenance tags.",
+        "Audited Playwright browser automation with interactive human approval gates, SSRF defense, and instant emergency STOP."
+      ]
+    },
+    features: [
+      {
+        title: "9 Unified Career Workspaces",
+        description: "Complete consolidation of career tools: Assistant, Opportunities, Career Center, Knowledge RAG, Computer Control, Voice, Automation, Activity Ledger, and System Settings."
+      },
+      {
+        title: "Central Assistant & Source Provenance",
+        description: "Dynamic multi-agent tool calling where every assertion is ground-truth tagged ([PERSONAL_KNOWLEDGE], [VERIFIED_MEMORY], [LIVE_RESEARCH], [UNKNOWN])."
+      },
+      {
+        title: "Career Command Center & Pipelines",
+        description: "Autonomous multi-step career discovery and application pipelines with persistent SQLite checkpoints and 6-stage Kanban board tracker."
+      },
+      {
+        title: "Audited Playwright Computer Control",
+        description: "Browser automation with strict domain allowlists, SSRF loopback blocking, interactive approval cards for mutating actions, and hardware emergency STOP."
+      },
+      {
+        title: "Dual-Tier Knowledge & Memory RAG",
+        description: "Vector cosine similarity search over PDF/TXT/MD/JSON documents combined with 8-category verified SQLite personal memory."
+      },
+      {
+        title: "Real-Time Voice Interface & Approval Guard",
+        description: "Spoken conversational pipeline with provider transparency (REAL/MOCK) and strict single-action voice confirmation safety."
+      },
+      {
+        title: "Autonomous Background Automation",
+        description: "Cron-driven scheduled jobs for daily opportunity scraping, weekly market reports, and stale application checks with bounded retries."
+      },
+      {
+        title: "Immutable Cryptographic Audit Trail",
+        description: "Tamper-evident SQLite audit ledger logging every tool invocation, operator approval, browser action, and authentication event."
+      }
+    ]
+  },
+
   {
     id: "hsc-ai-system",
     name: "HSC AI Study Intelligence System",

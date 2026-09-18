@@ -8,11 +8,12 @@ interface ProjectDetailModalProps {
   isOpen: boolean;
   onClose: () => void;
   onOpenAgentHqCaseStudy?: () => void;
+  onOpenAurenCaseStudy?: () => void;
   onOpenAtlasCaseStudy?: () => void;
   onOpenHscCaseStudy?: () => void;
 }
 
-export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, isOpen, onClose, onOpenAgentHqCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
+export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, isOpen, onClose, onOpenAgentHqCaseStudy, onOpenAurenCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'casestudy' | 'screenshots' | 'video' | 'interactive'>('overview');
   const [selectedScreenshotIndex, setSelectedScreenshotIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -57,6 +58,46 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
     }, 1900);
   };
 
+  // Interactive Live Workbench State for Auren
+  const [aurenMissionIndex, setAurenMissionIndex] = useState(0);
+  const [aurenRunning, setAurenRunning] = useState(false);
+  const [aurenStep, setAurenStep] = useState(4);
+
+  const aurenMissions = [
+    {
+      title: "Opportunity Discovery & Skill Matching",
+      prompt: "Find senior AI / TypeScript engineering roles, evaluate match score against verified profile, and flag missing skills.",
+      stages: [
+        { tool: "Central Assistant", action: "Intent Parsing", provider: "Gemini 2.5 Flash", latency: "95ms", tag: "[MODEL_KNOWLEDGE]", detail: "Classified user query into career_discovery workflow intent." },
+        { tool: "Personal Memory", action: "Grounding Query", provider: "SQLite WAL", latency: "14ms", tag: "[VERIFIED_MEMORY]", detail: "Retrieved 12 verified capabilities (TypeScript 5.8, React 19, SQLite, Agentic AI) with 100% confidence." },
+        { tool: "Playwright Sandbox", action: "Allowlist Verification", provider: "Security Gateway", latency: "28ms", tag: "[LIVE_RESEARCH]", detail: "Verified indeed.com against strict domain allowlist; rejected all loopback SSRF attempts." },
+        { tool: "Skill Gap Studio", action: "Deterministic Scoring", provider: "Local Engine", latency: "42ms", tag: "[INFERENCE]", detail: "Calculated 96% match score with zero hallucinated candidate credentials." }
+      ]
+    },
+    {
+      title: "Autonomous Proposal Preparation with Human Gate",
+      prompt: "Synthesize company research, draft tailored proposal for OpenAI, and halt at Human Approval Boundary before export.",
+      stages: [
+        { tool: "Central Assistant", action: "Workflow Init", provider: "Gemini 2.5 Flash", latency: "110ms", tag: "[MODEL_KNOWLEDGE]", detail: "Initialized application_preparation pipeline in SQLite WAL." },
+        { tool: "Knowledge RAG", action: "Document Retrieval", provider: "Vector Cosine", latency: "35ms", tag: "[PERSONAL_KNOWLEDGE]", detail: "Extracted relevant project highlights and quantified achievements from resume.pdf." },
+        { tool: "Proposal Drafter", action: "Tailored Pitch", provider: "Gemini 2.5 Flash", latency: "185ms", tag: "[INFERENCE]", detail: "Drafted tailored submission citing verified personal achievements only." },
+        { tool: "Policy Boundary", action: "Human Approval Halt", provider: "Cryptographic Gate", latency: "8ms", tag: "[REQUIRES_APPROVAL]", detail: "Generated Approval Token #AP-8842; execution paused until explicit operator confirmation." }
+      ]
+    }
+  ];
+
+  const handleRunAurenMission = () => {
+    setAurenRunning(true);
+    setAurenStep(0);
+    setTimeout(() => setAurenStep(1), 350);
+    setTimeout(() => setAurenStep(2), 750);
+    setTimeout(() => setAurenStep(3), 1150);
+    setTimeout(() => {
+      setAurenStep(4);
+      setAurenRunning(false);
+    }, 1550);
+  };
+
   // Interactive Live Workbench State for Atlas
   const [sampleTasks, setSampleTasks] = useState([
     { id: 1, text: "Review Atlas quarterly roadmap", done: true, tag: "Goals" },
@@ -81,7 +122,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
 
   if (!isOpen || !project) return null;
 
-  const hasInteractiveDemo = ['agent-hq', 'atlas', 'hsc-ai-system', 'gym-tracker'].includes(project.id);
+  const hasInteractiveDemo = ['agent-hq', 'auren', 'atlas', 'hsc-ai-system', 'gym-tracker'].includes(project.id);
 
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
@@ -225,7 +266,33 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                   </div>
 
                   <div className="flex items-center gap-3">
-                    {project.id === 'agent-hq' && onOpenAgentHqCaseStudy && (
+                                        {project.id === 'auren' && onOpenAurenCaseStudy && (
+                      <button
+                        onClick={onOpenAurenCaseStudy}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white text-xs font-bold transition-all shadow-md shadow-indigo-500/20 active:scale-95 cursor-pointer"
+                      >
+                        <span>Auren Full Case Study</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                                    {project.id === 'auren' && onOpenAurenCaseStudy && (
+                  <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-950/60 to-zinc-900 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <h4 className="text-sm font-bold text-white">Full Auren System Architecture Case Study</h4>
+                      <p className="text-xs text-zinc-300">
+                        Explore the 9 unified workspaces, SSRF sandbox, RAG memory grounding, and Playwright computer control.
+                      </p>
+                    </div>
+                    <button
+                      onClick={onOpenAurenCaseStudy}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-xs transition-all shadow-md shadow-indigo-500/20 active:scale-95 shrink-0 cursor-pointer"
+                    >
+                      <span>Open Full Case Study Page</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+                {project.id === 'agent-hq' && onOpenAgentHqCaseStudy && (
                       <button
                         onClick={onOpenAgentHqCaseStudy}
                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-xs transition-all shadow-md shadow-cyan-400/20 cursor-pointer"
@@ -581,7 +648,106 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                   </span>
                 </div>
 
-                {project.id === 'agent-hq' ? (
+                                {project.id === 'auren' ? (
+                  /* Auren Interactive Career OS Workbench */
+                  <div className="p-6 rounded-2xl bg-zinc-900/80 border border-indigo-500/20 space-y-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+                          <h4 className="text-base font-bold text-white">Auren Central Assistant & Policy Sandbox</h4>
+                        </div>
+                        <p className="text-xs text-zinc-400 mt-0.5">
+                          Simulate natural language career copilot workflows with strict source provenance and human gates
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={handleRunAurenMission}
+                        disabled={aurenRunning}
+                        className="px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-xs flex items-center gap-2 transition-all shadow-md shadow-indigo-500/20 disabled:opacity-50 active:scale-95 shrink-0 cursor-pointer"
+                      >
+                        <RefreshCw className={`w-3.5 h-3.5 ${aurenRunning ? 'animate-spin' : ''}`} />
+                        <span>{aurenRunning ? 'Executing Pipeline...' : 'Run Copilot Mission'}</span>
+                      </button>
+                    </div>
+
+                    {/* Mission Selector Tabs */}
+                    <div className="flex gap-2">
+                      {aurenMissions.map((m, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => { setAurenMissionIndex(idx); setAurenStep(4); }}
+                          className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                            aurenMissionIndex === idx
+                              ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-bold'
+                              : 'bg-zinc-950 text-zinc-400 border border-white/5 hover:text-white'
+                          }`}
+                        >
+                          Scenario 0{idx + 1}: {idx === 0 ? "Opportunity Matching" : "Proposal & Approval Gate"}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Prompt Box */}
+                    <div className="p-3.5 rounded-xl bg-zinc-950 border border-white/10 space-y-1 text-left">
+                      <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                        <span>OPERATOR PROMPT INPUT</span>
+                        <span className="text-indigo-400">Next.js 16 • SQLite WAL</span>
+                      </div>
+                      <p className="text-xs font-mono text-zinc-200">
+                        "{aurenMissions[aurenMissionIndex].prompt}"
+                      </p>
+                    </div>
+
+                    {/* Execution Pipeline Steps */}
+                    <div className="space-y-2.5">
+                      {aurenMissions[aurenMissionIndex].stages.map((stage, idx) => {
+                        const isDone = aurenStep >= idx;
+                        const isCurrent = aurenStep === idx && aurenRunning;
+
+                        return (
+                          <div
+                            key={idx}
+                            className={`p-3.5 rounded-xl border transition-all text-left flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+                              isCurrent
+                                ? 'bg-indigo-500/10 border-indigo-500/50 shadow-sm'
+                                : isDone
+                                ? 'bg-zinc-950/80 border-white/10'
+                                : 'bg-zinc-950/30 border-white/5 opacity-50'
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <div className={`w-6 h-6 rounded-full flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-0.5 ${
+                                isDone ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-zinc-500'
+                              }`}>
+                                {isDone ? '✓' : idx + 1}
+                              </div>
+                              <div className="space-y-0.5">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-bold text-white">{stage.tool}</span>
+                                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-900 border border-white/10 text-indigo-300 font-semibold">
+                                    {stage.action}
+                                  </span>
+                                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                    {stage.tag}
+                                  </span>
+                                </div>
+                                <p className="text-[11px] text-zinc-400">{stage.detail}</p>
+                              </div>
+                            </div>
+
+                            <div className="text-right shrink-0 flex items-center gap-2 self-end sm:self-center">
+                              <span className="text-[11px] font-mono text-zinc-500">{stage.provider}</span>
+                              <span className="text-[11px] font-mono text-cyan-400 font-semibold">{stage.latency}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : project.id === 'agent-hq' ? (
+
                   /* Agent HQ Autonomous Multi-Agent DAG Simulation */
                   <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 gap-3">
