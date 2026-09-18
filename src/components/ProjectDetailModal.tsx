@@ -7,11 +7,12 @@ interface ProjectDetailModalProps {
   project: Project | null;
   isOpen: boolean;
   onClose: () => void;
+  onOpenAgentHqCaseStudy?: () => void;
   onOpenAtlasCaseStudy?: () => void;
   onOpenHscCaseStudy?: () => void;
 }
 
-export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, isOpen, onClose, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
+export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, isOpen, onClose, onOpenAgentHqCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'casestudy' | 'screenshots' | 'video' | 'interactive'>('overview');
   const [selectedScreenshotIndex, setSelectedScreenshotIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -224,6 +225,15 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                   </div>
 
                   <div className="flex items-center gap-3">
+                    {project.id === 'agent-hq' && onOpenAgentHqCaseStudy && (
+                      <button
+                        onClick={onOpenAgentHqCaseStudy}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-xs transition-all shadow-md shadow-cyan-400/20 cursor-pointer"
+                      >
+                        <ArrowRight className="w-3.5 h-3.5" />
+                        <span>Agent HQ Full Case Study</span>
+                      </button>
+                    )}
                     {project.id === 'atlas' && onOpenAtlasCaseStudy && (
                       <button
                         onClick={onOpenAtlasCaseStudy}
@@ -339,6 +349,22 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
             {/* Case Study & Architecture Tab */}
             {activeTab === 'casestudy' && project.caseStudy && (
               <div className="space-y-8">
+                {project.id === 'agent-hq' && onOpenAgentHqCaseStudy && (
+                  <div className="p-5 rounded-2xl bg-cyan-950/30 border border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1 text-left">
+                      <span className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider block">Dedicated Engineering Case Study Page Available</span>
+                      <p className="text-xs text-zinc-300">Explore in-depth documentation on the topological DAG task scheduler, 6-agent roster, LLM failover cascade, and SQLite WAL storage.</p>
+                    </div>
+                    <button
+                      onClick={onOpenAgentHqCaseStudy}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-xs transition-all shrink-0 cursor-pointer shadow-md shadow-cyan-400/20"
+                    >
+                      <span>Open Full Case Study Page</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+
                 {/* Architecture Overview Card */}
                 <div className="p-6 rounded-2xl bg-zinc-900/60 border border-white/10 space-y-3">
                   <div className="flex items-center gap-2 text-[#4DA3FF] font-mono text-xs font-semibold uppercase tracking-wider">

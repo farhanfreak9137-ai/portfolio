@@ -5,11 +5,12 @@ import { Project } from '../types';
 
 interface SelectedWorkProps {
   onSelectProject: (project: Project) => void;
+  onOpenAgentHqCaseStudy?: () => void;
   onOpenAtlasCaseStudy?: () => void;
   onOpenHscCaseStudy?: () => void;
 }
 
-export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
+export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onOpenAgentHqCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
   const agentHqProject = projects.find(p => p.id === 'agent-hq') || projects[0];
   const atlasProject = projects.find(p => p.id === 'atlas') || projects[1];
   const hscProject = projects.find(p => p.id === 'hsc-ai-system') || projects[2];
@@ -136,12 +137,22 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-3 pt-2">
+                {onOpenAgentHqCaseStudy && (
+                  <button
+                    onClick={onOpenAgentHqCaseStudy}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-sm transition-all shadow-md shadow-cyan-400/20 active:scale-95 cursor-pointer"
+                  >
+                    <span>Explore Full Case Study</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
+
                 <button
                   onClick={() => onSelectProject(agentHqProject)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-sm transition-all shadow-md shadow-cyan-400/20 active:scale-95 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white font-semibold text-sm border border-white/10 transition-all active:scale-95 cursor-pointer"
                 >
-                  <span>View Architecture & Details</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <Workflow className="w-4 h-4 text-cyan-400" />
+                  <span>Interactive Live Demo</span>
                 </button>
 
                 {agentHqProject.githubUrl && (
@@ -149,10 +160,10 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
                     href={agentHqProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-semibold text-sm border border-white/10 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white font-semibold text-sm border border-white/10 transition-all cursor-pointer"
                   >
                     <Github className="w-4 h-4" />
-                    <span>GitHub Repository</span>
+                    <span>GitHub</span>
                   </a>
                 )}
               </div>
