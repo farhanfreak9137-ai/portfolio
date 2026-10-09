@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { SelectedWork } from './components/SelectedWork';
@@ -7,14 +7,25 @@ import { AboutSection } from './components/AboutSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { ProjectDetailModal } from './components/ProjectDetailModal';
-import { ResumeModal } from './components/ResumeModal';
-import { AtlasCaseStudyPage } from './components/AtlasCaseStudyPage';
-import { HscAiCaseStudyPage } from './components/HscAiCaseStudyPage';
-import { AgentHqCaseStudyPage } from './components/AgentHqCaseStudyPage';
-import { AurenCaseStudyPage } from './components/AurenCaseStudyPage';
-import { WatchvaultCaseStudyPage } from './components/WatchvaultCaseStudyPage';
 import { Project } from './types';
+
+// Code-split Case Studies & Modals to slash initial bundle weight
+const ProjectDetailModal = lazy(() => import('./components/ProjectDetailModal').then(m => ({ default: m.ProjectDetailModal })));
+const ResumeModal = lazy(() => import('./components/ResumeModal').then(m => ({ default: m.ResumeModal })));
+const AtlasCaseStudyPage = lazy(() => import('./components/AtlasCaseStudyPage').then(m => ({ default: m.AtlasCaseStudyPage })));
+const HscAiCaseStudyPage = lazy(() => import('./components/HscAiCaseStudyPage').then(m => ({ default: m.HscAiCaseStudyPage })));
+const AgentHqCaseStudyPage = lazy(() => import('./components/AgentHqCaseStudyPage').then(m => ({ default: m.AgentHqCaseStudyPage })));
+const AurenCaseStudyPage = lazy(() => import('./components/AurenCaseStudyPage').then(m => ({ default: m.AurenCaseStudyPage })));
+const WatchvaultCaseStudyPage = lazy(() => import('./components/WatchvaultCaseStudyPage').then(m => ({ default: m.WatchvaultCaseStudyPage })));
+
+const CaseStudyFallback = () => (
+  <div className="min-h-screen bg-[#07080c] flex items-center justify-center p-8">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-8 h-8 rounded-full border-2 border-[#4DA3FF] border-t-transparent animate-spin" />
+      <span className="text-xs font-mono text-zinc-400 tracking-wider">Loading System Architecture...</span>
+    </div>
+  </div>
+);
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -154,12 +165,16 @@ export default function App() {
     return (
       <div className="min-h-screen bg-[#07080c] text-neutral-100 selection:bg-cyan-400 selection:text-black">
         <Navbar activeSection="work" onNavigate={handleNavigate} onOpenResume={handleOpenResume} />
-        <AurenCaseStudyPage onBack={handleBackToPortfolio} />
+        <Suspense fallback={<CaseStudyFallback />}>
+          <AurenCaseStudyPage onBack={handleBackToPortfolio} />
+        </Suspense>
         <Footer onNavigate={handleNavigate} />
-        <ResumeModal
-          isOpen={isResumeModalOpen}
-          onClose={() => setIsResumeModalOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <ResumeModal
+            isOpen={isResumeModalOpen}
+            onClose={() => setIsResumeModalOpen(false)}
+          />
+        </Suspense>
       </div>
     );
   }
@@ -168,12 +183,16 @@ export default function App() {
     return (
       <div className="min-h-screen bg-[#08090d] text-neutral-100 selection:bg-rose-500 selection:text-white">
         <Navbar activeSection="work" onNavigate={handleNavigate} onOpenResume={handleOpenResume} />
-        <WatchvaultCaseStudyPage onBack={handleBackToPortfolio} />
+        <Suspense fallback={<CaseStudyFallback />}>
+          <WatchvaultCaseStudyPage onBack={handleBackToPortfolio} />
+        </Suspense>
         <Footer onNavigate={handleNavigate} />
-        <ResumeModal
-          isOpen={isResumeModalOpen}
-          onClose={() => setIsResumeModalOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <ResumeModal
+            isOpen={isResumeModalOpen}
+            onClose={() => setIsResumeModalOpen(false)}
+          />
+        </Suspense>
       </div>
     );
   }
@@ -182,12 +201,16 @@ export default function App() {
     return (
       <div className="min-h-screen bg-[#090a0f] text-neutral-100 selection:bg-cyan-400 selection:text-black">
         <Navbar activeSection="work" onNavigate={handleNavigate} onOpenResume={handleOpenResume} />
-        <AgentHqCaseStudyPage onBack={handleBackToPortfolio} />
+        <Suspense fallback={<CaseStudyFallback />}>
+          <AgentHqCaseStudyPage onBack={handleBackToPortfolio} />
+        </Suspense>
         <Footer onNavigate={handleNavigate} />
-        <ResumeModal
-          isOpen={isResumeModalOpen}
-          onClose={() => setIsResumeModalOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <ResumeModal
+            isOpen={isResumeModalOpen}
+            onClose={() => setIsResumeModalOpen(false)}
+          />
+        </Suspense>
       </div>
     );
   }
@@ -196,12 +219,16 @@ export default function App() {
     return (
       <div className="min-h-screen bg-[#090a0f] text-neutral-100 selection:bg-[#4DA3FF] selection:text-black">
         <Navbar activeSection="work" onNavigate={handleNavigate} onOpenResume={handleOpenResume} />
-        <AtlasCaseStudyPage onBack={handleBackToPortfolio} />
+        <Suspense fallback={<CaseStudyFallback />}>
+          <AtlasCaseStudyPage onBack={handleBackToPortfolio} />
+        </Suspense>
         <Footer onNavigate={handleNavigate} />
-        <ResumeModal
-          isOpen={isResumeModalOpen}
-          onClose={() => setIsResumeModalOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <ResumeModal
+            isOpen={isResumeModalOpen}
+            onClose={() => setIsResumeModalOpen(false)}
+          />
+        </Suspense>
       </div>
     );
   }
@@ -210,12 +237,16 @@ export default function App() {
     return (
       <div className="min-h-screen bg-[#090a0f] text-neutral-100 selection:bg-indigo-500 selection:text-white">
         <Navbar activeSection="work" onNavigate={handleNavigate} onOpenResume={handleOpenResume} />
-        <HscAiCaseStudyPage onBack={handleBackToPortfolio} />
+        <Suspense fallback={<CaseStudyFallback />}>
+          <HscAiCaseStudyPage onBack={handleBackToPortfolio} />
+        </Suspense>
         <Footer onNavigate={handleNavigate} />
-        <ResumeModal
-          isOpen={isResumeModalOpen}
-          onClose={() => setIsResumeModalOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <ResumeModal
+            isOpen={isResumeModalOpen}
+            onClose={() => setIsResumeModalOpen(false)}
+          />
+        </Suspense>
       </div>
     );
   }
@@ -246,22 +277,24 @@ export default function App() {
       <Footer onNavigate={handleNavigate} />
 
       {/* Deep Dive Project Detail Modal */}
-      <ProjectDetailModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseProjectModal}
-        onOpenAgentHqCaseStudy={handleOpenAgentHqCaseStudy}
-        onOpenAurenCaseStudy={handleOpenAurenCaseStudy}
-        onOpenWatchvaultCaseStudy={handleOpenWatchvaultCaseStudy}
-        onOpenAtlasCaseStudy={handleOpenAtlasCaseStudy}
-        onOpenHscCaseStudy={handleOpenHscCaseStudy}
-      />
+      <Suspense fallback={null}>
+        <ProjectDetailModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={handleCloseProjectModal}
+          onOpenAgentHqCaseStudy={handleOpenAgentHqCaseStudy}
+          onOpenAurenCaseStudy={handleOpenAurenCaseStudy}
+          onOpenWatchvaultCaseStudy={handleOpenWatchvaultCaseStudy}
+          onOpenAtlasCaseStudy={handleOpenAtlasCaseStudy}
+          onOpenHscCaseStudy={handleOpenHscCaseStudy}
+        />
 
-      {/* Resume Modal */}
-      <ResumeModal
-        isOpen={isResumeModalOpen}
-        onClose={() => setIsResumeModalOpen(false)}
-      />
+        {/* Resume Modal */}
+        <ResumeModal
+          isOpen={isResumeModalOpen}
+          onClose={() => setIsResumeModalOpen(false)}
+        />
+      </Suspense>
     </div>
   );
 }

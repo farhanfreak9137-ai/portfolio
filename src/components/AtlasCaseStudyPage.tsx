@@ -599,7 +599,7 @@ public class AtlasPhoneControlPlugin extends Plugin {
           <div>
             <h3 className="text-xl font-bold text-white">Explore Atlas Live</h3>
             <p className="text-xs text-zinc-400 mt-1">
-              Experience the deployed web application at <code className="text-[#4DA3FF]">https://atlas-aa7q.vercel.app/</code>
+              Experience the deployed web application at <code className="text-[#4DA3FF]">https://atlas-sy7b.vercel.app/</code>
             </p>
           </div>
 
@@ -611,17 +611,28 @@ public class AtlasPhoneControlPlugin extends Plugin {
               Back to Portfolio
             </button>
             <a
-              href="https://atlas-aa7q.vercel.app/"
+              href="https://atlas-sy7b.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-xl bg-[#4DA3FF] hover:bg-[#70B7FF] text-zinc-950 text-xs font-bold transition-all shadow-md shadow-[#4DA3FF]/20 flex items-center gap-2"
             >
               <ExternalLink className="w-4 h-4" />
-              <span>Launch Deployed Web App</span>
+              <span>Launch Deployed Web App ↗</span>
             </a>
           </div>
         </div>
 
+      </div>
+
+      {/* Floating Mobile Quick Return Button */}
+      <div className="fixed bottom-6 right-6 z-40 sm:hidden">
+        <button
+          onClick={onBack}
+          className="px-4 py-2.5 rounded-full bg-zinc-900/95 border border-white/20 text-white shadow-2xl backdrop-blur-md text-xs font-semibold flex items-center gap-2 hover:bg-zinc-800 transition-all cursor-pointer"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 text-[#4DA3FF]" />
+          <span>Back to Portfolio</span>
+        </button>
       </div>
 
       {/* Lightbox Modal */}

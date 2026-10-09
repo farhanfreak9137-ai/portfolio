@@ -1,6 +1,6 @@
 import { PersonalInfo, Project, Service, SkillGroup } from '../types';
-import farhanProfilePhoto from '../assets/images/farhan_profile_photo_1786384718164.png';
-import farhanSuitPhoto from '../assets/images/mysuit.png';
+import farhanProfilePhoto from '../assets/images/farhan_profile_photo_1786384718164.webp';
+import farhanSuitPhoto from '../assets/images/mysuit.webp';
 import atlasDashboardImg from '../assets/images/atlas_dashboard_screenshot_1786388879362.jpg';
 import atlasTasksImg from '../assets/images/atlas_tasks_screenshot_1786388896832.jpg';
 import atlasHabitsImg from '../assets/images/atlas_habits_screenshot_1786388911101.jpg';
@@ -265,7 +265,6 @@ export const projects: Project[] = [
     screenshots: agentHqScreenshots,
     screenshotTitles: agentHqScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: agentHqScreenshotMetadata.map(m => m.description),
-    liveUrl: "https://github.com/farhanfreak9137-ai/agent-hq",
     githubUrl: "https://github.com/farhanfreak9137-ai/agent-hq",
     isFeatured: true,
     caseStudy: {
@@ -352,7 +351,6 @@ export const projects: Project[] = [
     screenshots: aurenScreenshots,
     screenshotTitles: aurenScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: aurenScreenshotMetadata.map(m => m.description),
-    liveUrl: "http://localhost:3000",
     githubUrl: "https://github.com/farhanfreak9137-ai/farhan-ai",
     isFeatured: true,
     caseStudy: {
@@ -447,7 +445,7 @@ export const projects: Project[] = [
     screenshots: watchvaultScreenshots,
     screenshotTitles: watchvaultScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: watchvaultScreenshotMetadata.map(m => m.description),
-    liveUrl: "https://github.com/farhanfreak9137-ai/moviewatchlist",
+    liveUrl: "https://moviewatchlist-mu.vercel.app/",
     githubUrl: "https://github.com/farhanfreak9137-ai/moviewatchlist",
     isFeatured: true,
     caseStudy: {
@@ -598,7 +596,7 @@ export const projects: Project[] = [
     screenshots: atlasScreenshots,
     screenshotTitles: atlasScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: atlasScreenshotMetadata.map(m => m.description),
-    liveUrl: "https://atlas-aa7q.vercel.app/",
+    liveUrl: "https://atlas-sy7b.vercel.app/",
     githubUrl: "https://github.com/farhanfreak9137-ai/Atlas",
     isFeatured: true,
     caseStudy: {
@@ -675,8 +673,6 @@ export const projects: Project[] = [
     screenshots: gymTrackerScreenshots,
     screenshotTitles: gymTrackerScreenshotMetadata.map(m => m.title),
     screenshotDescriptions: gymTrackerScreenshotMetadata.map(m => m.description),
-    liveUrl: "#",
-    githubUrl: "#",
     isFeatured: false,
     caseStudy: {
       architectureOverview: "Gym Tracker is designed as an offline-friendly, high-performance training companion optimized for fast interaction during active workouts. Built with React and TypeScript, it utilizes a client-side database adapter with lightweight time-series aggregation for volume charts.",

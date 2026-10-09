@@ -521,6 +521,18 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
                     <span>GitHub</span>
                   </a>
                 )}
+
+                {watchvaultProject.liveUrl && (
+                  <a
+                    href={watchvaultProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-zinc-300 hover:text-white text-sm font-semibold transition-all cursor-pointer"
+                  >
+                    <ExternalLink className="w-4 h-4 text-rose-400" />
+                    <span>Live App ↗</span>
+                  </a>
+                )}
               </div>
             </div>
 
@@ -796,7 +808,7 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
                     onClick={() => onSelectProject(hscProject)}
                     className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-zinc-200 text-sm font-medium transition-all cursor-pointer"
                   >
-                    <span>Quick Preview &amp; Sandbox</span>
+                    <span>Quick Preview</span>
                   </button>
 
                   {hscProject.liveUrl && hscProject.liveUrl !== '#' && (

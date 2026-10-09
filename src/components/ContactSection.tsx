@@ -157,20 +157,39 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
           <div className="lg:col-span-7">
             <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl">
               {submitted ? (
-                <div className="py-12 text-center space-y-4">
+                <div className="py-10 text-center space-y-5">
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">Message Sent Successfully!</h3>
-                  <p className="text-sm text-zinc-300 max-w-md mx-auto">
-                    Thank you for reaching out. Farhan usually reviews project inquiries within 24 hours.
-                  </p>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">Inquiry Staged & Ready</h3>
+                    <p className="text-sm text-zinc-300 max-w-md mx-auto mt-2">
+                      An email client draft was opened to send your inquiry to <span className="text-white font-mono font-semibold">{personalInfo.email}</span>.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-zinc-950 border border-white/10 max-w-md mx-auto text-left space-y-2">
+                    <div className="text-xs font-mono text-zinc-400 flex items-center justify-between">
+                      <span>Did your mail app fail to open?</span>
+                      <button
+                        onClick={handleCopyEmail}
+                        className="text-xs text-[#4DA3FF] hover:text-[#70B7FF] font-semibold flex items-center gap-1 cursor-pointer"
+                      >
+                        {copiedEmail ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        <span>{copiedEmail ? 'Copied Email' : 'Copy Email'}</span>
+                      </button>
+                    </div>
+                    <p className="text-xs text-zinc-400">
+                      You can send directly to <span className="text-white font-mono">{personalInfo.email}</span> with your project brief.
+                    </p>
+                  </div>
+
                   <button
                     onClick={() => {
                       setSubmitted(false);
                       setFormData({ name: '', email: '', projectType: 'Web Application / Dashboard', message: '', budget: '$500 - $1,500' });
                     }}
-                    className="px-6 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-medium text-xs transition-all"
+                    className="px-6 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-medium text-xs transition-all cursor-pointer"
                   >
                     Send Another Inquiry
                   </button>

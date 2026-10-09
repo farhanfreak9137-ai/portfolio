@@ -903,12 +903,22 @@ export function calculateMovieFinancials(budget = 0, revenue = 0, rating = 0) {
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <a
-              href="https://github.com/farhanfreak9137-ai/moviewatchlist"
+              href="https://moviewatchlist-mu.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-bold text-sm transition-all shadow-lg shadow-rose-500/20 cursor-pointer"
             >
-              <Github className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4" />
+              <span>Launch Live Web App ↗</span>
+            </a>
+
+            <a
+              href="https://github.com/farhanfreak9137-ai/moviewatchlist"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-white font-bold text-sm transition-all cursor-pointer"
+            >
+              <Github className="w-4 h-4 text-zinc-300" />
               <span>View on GitHub</span>
             </a>
 
@@ -922,6 +932,17 @@ export function calculateMovieFinancials(budget = 0, revenue = 0, rating = 0) {
           </div>
         </div>
 
+      </div>
+
+      {/* Floating Mobile Quick Return Button */}
+      <div className="fixed bottom-6 right-6 z-40 sm:hidden">
+        <button
+          onClick={onBack}
+          className="px-4 py-2.5 rounded-full bg-zinc-900/95 border border-white/20 text-white shadow-2xl backdrop-blur-md text-xs font-semibold flex items-center gap-2 hover:bg-zinc-800 transition-all cursor-pointer"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 text-rose-400" />
+          <span>Back to Portfolio</span>
+        </button>
       </div>
 
       {/* Lightbox Modal */}
