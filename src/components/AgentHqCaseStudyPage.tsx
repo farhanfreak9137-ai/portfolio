@@ -819,11 +819,15 @@ export class DAGScheduler extends EventEmitter {
       {/* Screenshot Lightbox Modal */}
       <ScreenshotLightbox
         isOpen={lightboxOpen}
+        imageSrc={agentHqScreenshots[selectedScreenshotIndex]}
+        title={agentHqScreenshotMetadata[selectedScreenshotIndex]?.title}
+        description={agentHqScreenshotMetadata[selectedScreenshotIndex]?.description}
+        currentIndex={selectedScreenshotIndex}
+        totalImages={agentHqScreenshots.length}
         onClose={() => setLightboxOpen(false)}
-        screenshots={agentHqScreenshots}
-        titles={agentHqScreenshotMetadata.map(m => m.title)}
-        descriptions={agentHqScreenshotMetadata.map(m => m.description)}
-        initialIndex={selectedScreenshotIndex}
+        onPrev={() => setSelectedScreenshotIndex((selectedScreenshotIndex - 1 + agentHqScreenshots.length) % agentHqScreenshots.length)}
+        onNext={() => setSelectedScreenshotIndex((selectedScreenshotIndex + 1) % agentHqScreenshots.length)}
+        projectTitle="Agent HQ Platform"
       />
 
     </div>

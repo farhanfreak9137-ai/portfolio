@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ExternalLink, Github, Play, CheckCircle2, Sparkles, Layers, ShieldCheck, Video, Layout, Plus, Trash2, Zap, ArrowRight, ChevronLeft, ChevronRight, Smartphone, Maximize2, Bot, Workflow, Mail, Bell, Terminal, RefreshCw } from 'lucide-react';
+import { X, ExternalLink, Github, Play, CheckCircle2, Sparkles, Layers, ShieldCheck, Video, Layout, Zap, ArrowRight } from 'lucide-react';
 import { Project } from '../types';
 import { ScreenshotLightbox } from './ScreenshotLightbox';
 
@@ -9,146 +9,17 @@ interface ProjectDetailModalProps {
   onClose: () => void;
   onOpenAgentHqCaseStudy?: () => void;
   onOpenAurenCaseStudy?: () => void;
+  onOpenWatchvaultCaseStudy?: () => void;
   onOpenAtlasCaseStudy?: () => void;
   onOpenHscCaseStudy?: () => void;
 }
 
-export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, isOpen, onClose, onOpenAgentHqCaseStudy, onOpenAurenCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'casestudy' | 'screenshots' | 'video' | 'interactive'>('overview');
+export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, isOpen, onClose, onOpenAgentHqCaseStudy, onOpenAurenCaseStudy, onOpenWatchvaultCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
+  const [activeTab, setActiveTab] = useState<'overview' | 'casestudy' | 'screenshots' | 'video'>('overview');
   const [selectedScreenshotIndex, setSelectedScreenshotIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  // Interactive Live Workbench State for Agent HQ
-  const [agentHqMissionIndex, setAgentHqMissionIndex] = useState(0);
-  const [agentHqRunning, setAgentHqRunning] = useState(false);
-  const [agentHqStep, setAgentHqStep] = useState(4); // 4 = all stages completed
-
-  const agentHqMissions = [
-    {
-      title: "Outreach Campaign Pipeline",
-      prompt: "Research remote AI engineering roles, match Farhan's profile, stage 20s-paced SMTP outbox with XLSX attachment, and alert Discord on replies.",
-      stages: [
-        { agent: "Boss Commander", role: "Mission Decomposition", provider: "Gemini 2.0 Flash", latency: "142ms", detail: "Decomposed mission into 4 DAG dependency nodes with concurrency limits." },
-        { agent: "Atlas Researcher", role: "Web Intelligence & Scraping", provider: "Groq Llama-3.3", latency: "288ms", detail: "Scraped 5 remote AI opportunities and generated workspace/remote-job-matches.xlsx." },
-        { agent: "Strategist", role: "Profile Matcher & Scoring", provider: "Antigravity CLI", latency: "96ms", detail: "Ranked roles matching Farhan's multi-agent and full-stack expertise." },
-        { agent: "Outreach Agent", role: "Gmail SMTP & CRM Outbox", provider: "Nodemailer", latency: "64ms", detail: "Staged 5 personalized applications with 20s anti-spam delivery pacing." },
-        { agent: "Discord Alert", role: "Mobile Push Notification", provider: "Discord Webhook", latency: "38ms", detail: "Dispatched formatted status embed card directly to Farhan's mobile device." }
-      ]
-    },
-    {
-      title: "Repository Architectural & Security Audit",
-      prompt: "Perform deep modular analysis, check provider failover cascades, verify zero CVEs, and confirm SQLite WAL transactional safety.",
-      stages: [
-        { agent: "Boss Commander", role: "Mission Decomposition", provider: "Gemini 2.0 Flash", latency: "110ms", detail: "Spawned security and architectural audit sub-tasks with strict isolated context." },
-        { agent: "Sentinel", role: "Vulnerability & Secret Scanner", provider: "AST Scanner", latency: "195ms", detail: "Verified zero credential leaks in git history; all API keys masked with asterisks." },
-        { agent: "Atlas", role: "Dependency Topology Analyzer", provider: "Node.js AST", latency: "220ms", detail: "Mapped all 9 system modules; verified circular dependency index is 0.00%." }
-      ]
-    }
-  ];
-
-  const handleRunAgentHqMission = () => {
-    setAgentHqRunning(true);
-    setAgentHqStep(0);
-    setTimeout(() => setAgentHqStep(1), 400);
-    setTimeout(() => setAgentHqStep(2), 900);
-    setTimeout(() => setAgentHqStep(3), 1400);
-    setTimeout(() => {
-      setAgentHqStep(4);
-      setAgentHqRunning(false);
-    }, 1900);
-  };
-
-  // Interactive Live Workbench State for Auren
-  const [aurenMissionIndex, setAurenMissionIndex] = useState(0);
-  const [aurenRunning, setAurenRunning] = useState(false);
-  const [aurenStep, setAurenStep] = useState(4);
-
-  const aurenMissions = [
-    {
-      title: "Opportunity Discovery & Skill Matching",
-      prompt: "Find senior AI / TypeScript engineering roles, evaluate match score against verified profile, and flag missing skills.",
-      stages: [
-        { tool: "Central Assistant", action: "Intent Parsing", provider: "Gemini 2.5 Flash", latency: "95ms", tag: "[MODEL_KNOWLEDGE]", detail: "Classified user query into career_discovery workflow intent." },
-        { tool: "Personal Memory", action: "Grounding Query", provider: "SQLite WAL", latency: "14ms", tag: "[VERIFIED_MEMORY]", detail: "Retrieved 12 verified capabilities (TypeScript 5.8, React 19, SQLite, Agentic AI) with 100% confidence." },
-        { tool: "Playwright Sandbox", action: "Allowlist Verification", provider: "Security Gateway", latency: "28ms", tag: "[LIVE_RESEARCH]", detail: "Verified indeed.com against strict domain allowlist; rejected all loopback SSRF attempts." },
-        { tool: "Skill Gap Studio", action: "Deterministic Scoring", provider: "Local Engine", latency: "42ms", tag: "[INFERENCE]", detail: "Calculated 96% match score with zero hallucinated candidate credentials." }
-      ]
-    },
-    {
-      title: "Autonomous Proposal Preparation with Human Gate",
-      prompt: "Synthesize company research, draft tailored proposal for OpenAI, and halt at Human Approval Boundary before export.",
-      stages: [
-        { tool: "Central Assistant", action: "Workflow Init", provider: "Gemini 2.5 Flash", latency: "110ms", tag: "[MODEL_KNOWLEDGE]", detail: "Initialized application_preparation pipeline in SQLite WAL." },
-        { tool: "Knowledge RAG", action: "Document Retrieval", provider: "Vector Cosine", latency: "35ms", tag: "[PERSONAL_KNOWLEDGE]", detail: "Extracted relevant project highlights and quantified achievements from resume.pdf." },
-        { tool: "Proposal Drafter", action: "Tailored Pitch", provider: "Gemini 2.5 Flash", latency: "185ms", tag: "[INFERENCE]", detail: "Drafted tailored submission citing verified personal achievements only." },
-        { tool: "Policy Boundary", action: "Human Approval Halt", provider: "Cryptographic Gate", latency: "8ms", tag: "[REQUIRES_APPROVAL]", detail: "Generated Approval Token #AP-8842; execution paused until explicit operator confirmation." }
-      ]
-    }
-  ];
-
-  const handleRunAurenMission = () => {
-    setAurenRunning(true);
-    setAurenStep(0);
-    setTimeout(() => setAurenStep(1), 350);
-    setTimeout(() => setAurenStep(2), 750);
-    setTimeout(() => setAurenStep(3), 1150);
-    setTimeout(() => {
-      setAurenStep(4);
-      setAurenRunning(false);
-    }, 1550);
-  };
-
-  // Interactive Live Workbench State for Atlas
-  const [sampleTasks, setSampleTasks] = useState([
-    { id: 1, text: "Review Atlas quarterly roadmap", done: true, tag: "Goals" },
-    { id: 2, text: "Log 30 min morning deep work habit", done: false, tag: "Habit" },
-    { id: 3, text: "Integrate Gemini AI subtask assistant", done: true, tag: "AI Feature" },
-  ]);
-  const [newTaskInput, setNewTaskInput] = useState('');
-  const [aiDecomposing, setAiDecomposing] = useState(false);
-
-  // Interactive Live Workbench State for HSC AI Study System
-  const [hscSelectedTopic, setHscSelectedTopic] = useState<'thermo' | 'dynamics' | 'vectors' | 'calculus'>('thermo');
-  const [hscWeaknessIndex, setHscWeaknessIndex] = useState<number>(60);
-  const [hscRevealedStep, setHscRevealedStep] = useState<number>(1);
-  const [hscAiSimulating, setHscAiSimulating] = useState<boolean>(false);
-
-  // Interactive Live Workbench State for Gym Tracker
-  const [sampleSets, setSampleSets] = useState([
-    { id: 1, exercise: "Bench Press", weight: 185, reps: 8, completed: true },
-    { id: 2, exercise: "Bench Press", weight: 195, reps: 6, completed: true },
-    { id: 3, exercise: "Bench Press", weight: 205, reps: 4, completed: false },
-  ]);
-
   if (!isOpen || !project) return null;
-
-  const hasInteractiveDemo = ['agent-hq', 'auren', 'atlas', 'hsc-ai-system', 'gym-tracker'].includes(project.id);
-
-  const handleAddTask = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newTaskInput.trim()) return;
-    setSampleTasks([
-      ...sampleTasks,
-      { id: Date.now(), text: newTaskInput.trim(), done: false, tag: "Task" }
-    ]);
-    setNewTaskInput('');
-  };
-
-  const handleToggleTask = (id: number) => {
-    setSampleTasks(sampleTasks.map(t => t.id === id ? { ...t, done: !t.done } : t));
-  };
-
-  const handleAiBreakdown = () => {
-    setAiDecomposing(true);
-    setTimeout(() => {
-      setSampleTasks([
-        ...sampleTasks,
-        { id: Date.now() + 1, text: "AI Subtask 1: Define clear priority metrics", done: false, tag: "AI Generated" },
-        { id: Date.now() + 2, text: "AI Subtask 2: Schedule 45-min focus block", done: false, tag: "AI Generated" },
-      ]);
-      setAiDecomposing(false);
-    }, 1200);
-  };
 
   return (
     <>
@@ -235,19 +106,6 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                 <span>Demo Video</span>
               </button>
             )}
-            {hasInteractiveDemo && (
-              <button
-                onClick={() => setActiveTab('interactive')}
-                className={`py-3 px-4 border-b-2 transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer ${
-                  activeTab === 'interactive'
-                    ? 'border-[#4DA3FF] text-[#4DA3FF] font-semibold'
-                    : 'border-transparent hover:text-white'
-                }`}
-              >
-                <Sparkles className="w-4 h-4 text-[#4DA3FF]" />
-                <span>Interactive Live Demo</span>
-              </button>
-            )}
           </div>
 
           {/* Modal Content Body */}
@@ -266,31 +124,23 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
                   </div>
 
                   <div className="flex items-center gap-3">
-                                        {project.id === 'auren' && onOpenAurenCaseStudy && (
+                    {project.id === 'auren' && onOpenAurenCaseStudy && (
                       <button
                         onClick={onOpenAurenCaseStudy}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white text-xs font-bold transition-all shadow-md shadow-indigo-500/20 active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-xs transition-all shadow-md shadow-indigo-500/20 active:scale-95 cursor-pointer"
                       >
-                        <span>Auren Full Case Study</span>
                         <ArrowRight className="w-3.5 h-3.5" />
+                        <span>Auren Full Case Study</span>
                       </button>
                     )}
-                                    {project.id === 'auren' && onOpenAurenCaseStudy && (
-                  <div className="p-4 rounded-xl bg-gradient-to-r from-indigo-950/60 to-zinc-900 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                      <h4 className="text-sm font-bold text-white">Full Auren System Architecture Case Study</h4>
-                      <p className="text-xs text-zinc-300">
-                        Explore the 9 unified workspaces, SSRF sandbox, RAG memory grounding, and Playwright computer control.
-                      </p>
-                    </div>
-                    <button
-                      onClick={onOpenAurenCaseStudy}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-xs transition-all shadow-md shadow-indigo-500/20 active:scale-95 shrink-0 cursor-pointer"
-                    >
-                      <span>Open Full Case Study Page</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                {project.id === 'watchvault' && onOpenWatchvaultCaseStudy && (
+                  <button
+                    onClick={onOpenWatchvaultCaseStudy}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-rose-500 hover:bg-rose-400 text-white font-bold text-xs transition-all shadow-md shadow-rose-500/20 cursor-pointer"
+                  >
+                    <ArrowRight className="w-3.5 h-3.5" />
+                    <span>WatchVault Full Case Study</span>
+                  </button>
                 )}
                 {project.id === 'agent-hq' && onOpenAgentHqCaseStudy && (
                       <button
@@ -416,6 +266,36 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
             {/* Case Study & Architecture Tab */}
             {activeTab === 'casestudy' && project.caseStudy && (
               <div className="space-y-8">
+                {project.id === 'auren' && onOpenAurenCaseStudy && (
+                  <div className="p-5 rounded-2xl bg-indigo-950/30 border border-indigo-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1 text-left">
+                      <span className="text-xs font-mono text-indigo-400 font-bold uppercase tracking-wider block">Dedicated Engineering Case Study Page Available</span>
+                      <p className="text-xs text-zinc-300">Explore in-depth documentation on the 9 unified workspaces, SSRF sandbox, RAG memory grounding, and Playwright computer control.</p>
+                    </div>
+                    <button
+                      onClick={onOpenAurenCaseStudy}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-xs transition-all shrink-0 cursor-pointer shadow-md shadow-indigo-500/20"
+                    >
+                      <span>Open Full Case Study Page</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+                {project.id === 'watchvault' && onOpenWatchvaultCaseStudy && (
+                  <div className="p-5 rounded-2xl bg-rose-950/30 border border-rose-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1 text-left">
+                      <span className="text-xs font-mono text-rose-400 font-bold uppercase tracking-wider block">Dedicated Engineering Case Study Page Available</span>
+                      <p className="text-xs text-zinc-300">Explore in-depth documentation on the offline-first Dexie IndexedDB architecture, SeriesGraph episode rating heatmaps, and Supabase cloud sync engine.</p>
+                    </div>
+                    <button
+                      onClick={onOpenWatchvaultCaseStudy}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-bold text-xs transition-all shrink-0 cursor-pointer shadow-md shadow-rose-500/20"
+                    >
+                      <span>Open Full Case Study Page</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
                 {project.id === 'agent-hq' && onOpenAgentHqCaseStudy && (
                   <div className="p-5 rounded-2xl bg-cyan-950/30 border border-cyan-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1 text-left">
@@ -638,525 +518,6 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project,
               </div>
             )}
 
-            {/* Interactive Live Demo Tab */}
-            {activeTab === 'interactive' && (
-              <div className="space-y-6">
-                <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
-                  <span>
-                    <strong>Interactive Feature Sandbox:</strong> Experience Farhan's core logic and state architecture directly inside this modal.
-                  </span>
-                </div>
-
-                                {project.id === 'auren' ? (
-                  /* Auren Interactive Career OS Workbench */
-                  <div className="p-6 rounded-2xl bg-zinc-900/80 border border-indigo-500/20 space-y-6">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-                          <h4 className="text-base font-bold text-white">Auren Central Assistant & Policy Sandbox</h4>
-                        </div>
-                        <p className="text-xs text-zinc-400 mt-0.5">
-                          Simulate natural language career copilot workflows with strict source provenance and human gates
-                        </p>
-                      </div>
-
-                      <button
-                        onClick={handleRunAurenMission}
-                        disabled={aurenRunning}
-                        className="px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-xs flex items-center gap-2 transition-all shadow-md shadow-indigo-500/20 disabled:opacity-50 active:scale-95 shrink-0 cursor-pointer"
-                      >
-                        <RefreshCw className={`w-3.5 h-3.5 ${aurenRunning ? 'animate-spin' : ''}`} />
-                        <span>{aurenRunning ? 'Executing Pipeline...' : 'Run Copilot Mission'}</span>
-                      </button>
-                    </div>
-
-                    {/* Mission Selector Tabs */}
-                    <div className="flex gap-2">
-                      {aurenMissions.map((m, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => { setAurenMissionIndex(idx); setAurenStep(4); }}
-                          className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
-                            aurenMissionIndex === idx
-                              ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-bold'
-                              : 'bg-zinc-950 text-zinc-400 border border-white/5 hover:text-white'
-                          }`}
-                        >
-                          Scenario 0{idx + 1}: {idx === 0 ? "Opportunity Matching" : "Proposal & Approval Gate"}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Prompt Box */}
-                    <div className="p-3.5 rounded-xl bg-zinc-950 border border-white/10 space-y-1 text-left">
-                      <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
-                        <span>OPERATOR PROMPT INPUT</span>
-                        <span className="text-indigo-400">Next.js 16 • SQLite WAL</span>
-                      </div>
-                      <p className="text-xs font-mono text-zinc-200">
-                        "{aurenMissions[aurenMissionIndex].prompt}"
-                      </p>
-                    </div>
-
-                    {/* Execution Pipeline Steps */}
-                    <div className="space-y-2.5">
-                      {aurenMissions[aurenMissionIndex].stages.map((stage, idx) => {
-                        const isDone = aurenStep >= idx;
-                        const isCurrent = aurenStep === idx && aurenRunning;
-
-                        return (
-                          <div
-                            key={idx}
-                            className={`p-3.5 rounded-xl border transition-all text-left flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
-                              isCurrent
-                                ? 'bg-indigo-500/10 border-indigo-500/50 shadow-sm'
-                                : isDone
-                                ? 'bg-zinc-950/80 border-white/10'
-                                : 'bg-zinc-950/30 border-white/5 opacity-50'
-                            }`}
-                          >
-                            <div className="flex items-start gap-3">
-                              <div className={`w-6 h-6 rounded-full flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-0.5 ${
-                                isDone ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-zinc-500'
-                              }`}>
-                                {isDone ? '✓' : idx + 1}
-                              </div>
-                              <div className="space-y-0.5">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-xs font-bold text-white">{stage.tool}</span>
-                                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-900 border border-white/10 text-indigo-300 font-semibold">
-                                    {stage.action}
-                                  </span>
-                                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                    {stage.tag}
-                                  </span>
-                                </div>
-                                <p className="text-[11px] text-zinc-400">{stage.detail}</p>
-                              </div>
-                            </div>
-
-                            <div className="text-right shrink-0 flex items-center gap-2 self-end sm:self-center">
-                              <span className="text-[11px] font-mono text-zinc-500">{stage.provider}</span>
-                              <span className="text-[11px] font-mono text-cyan-400 font-semibold">{stage.latency}</span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ) : project.id === 'agent-hq' ? (
-
-                  /* Agent HQ Autonomous Multi-Agent DAG Simulation */
-                  <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 gap-3">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                            Multi-Agent Execution Engine
-                          </span>
-                          <h4 className="text-base font-bold text-white">Autonomous DAG Scheduler &amp; Event Stream</h4>
-                        </div>
-                        <p className="text-xs text-zinc-400 mt-1">
-                          Test Boss mission decomposition, multi-agent delegation, and provider cascade execution.
-                        </p>
-                      </div>
-
-                      <button
-                        onClick={handleRunAgentHqMission}
-                        disabled={agentHqRunning}
-                        className="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-zinc-950 font-bold text-xs flex items-center gap-2 transition-all shadow-lg disabled:opacity-50 cursor-pointer self-start sm:self-auto"
-                      >
-                        {agentHqRunning ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
-                        <span>{agentHqRunning ? "Executing DAG..." : "Run Mission DAG"}</span>
-                      </button>
-                    </div>
-
-                    {/* Mission Selector */}
-                    <div className="space-y-2">
-                      <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">
-                        Select Mission Scenario:
-                      </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {agentHqMissions.map((m, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => {
-                              setAgentHqMissionIndex(idx);
-                              setAgentHqStep(4);
-                            }}
-                            className={`p-3 rounded-xl border text-left transition-all text-xs cursor-pointer ${
-                              agentHqMissionIndex === idx
-                                ? 'bg-cyan-500/20 text-white border-cyan-500/50 shadow-sm'
-                                : 'bg-zinc-950/60 text-zinc-400 border-white/5 hover:border-white/20 hover:text-zinc-200'
-                            }`}
-                          >
-                            <div className="font-semibold text-white">{m.title}</div>
-                            <div className="text-[11px] text-zinc-400 mt-1 line-clamp-2">{m.prompt}</div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Live Execution Pipeline */}
-                    <div className="space-y-3 pt-2">
-                      <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                        <span>Topological DAG Execution Pipeline:</span>
-                        <span className="text-cyan-400 font-semibold">
-                          {agentHqRunning ? "Running..." : "Pipeline Ready"}
-                        </span>
-                      </div>
-
-                      <div className="space-y-2.5">
-                        {agentHqMissions[agentHqMissionIndex].stages.map((stage, idx) => {
-                          const isDone = agentHqStep >= idx;
-                          const isCurrent = agentHqStep === idx && agentHqRunning;
-
-                          return (
-                            <div
-                              key={idx}
-                              className={`p-3.5 rounded-xl border transition-all ${
-                                isDone
-                                  ? 'bg-zinc-950 border-cyan-500/30'
-                                  : 'bg-zinc-950/40 border-white/5 opacity-50'
-                              }`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2.5">
-                                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
-                                    isDone ? 'bg-cyan-500/20 text-cyan-300' : 'bg-zinc-800 text-zinc-500'
-                                  }`}>
-                                    {idx + 1}
-                                  </div>
-                                  <div>
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-xs font-semibold text-white">{stage.agent}</span>
-                                      <span className="text-[10px] font-mono text-zinc-400">({stage.role})</span>
-                                    </div>
-                                    <p className="text-[11px] text-zinc-400 mt-0.5">{stage.detail}</p>
-                                  </div>
-                                </div>
-
-                                <div className="text-right shrink-0">
-                                  <div className="flex items-center justify-end gap-1.5">
-                                    <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-900 border border-white/10 text-zinc-300">
-                                      {stage.provider}
-                                    </span>
-                                    <span className="text-[10px] font-mono text-cyan-400 font-semibold">
-                                      {stage.latency}
-                                    </span>
-                                  </div>
-                                  <div className="text-[10px] font-mono mt-1">
-                                    {isDone ? (
-                                      <span className="text-emerald-400 font-medium flex items-center justify-end gap-1">
-                                        <CheckCircle2 className="w-3 h-3" />
-                                        Completed
-                                      </span>
-                                    ) : isCurrent ? (
-                                      <span className="text-cyan-400 font-medium animate-pulse">Running</span>
-                                    ) : (
-                                      <span className="text-zinc-500">Pending</span>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                ) : project.id === 'hsc-ai-system' ? (
-                  /* HSC AI Study Intelligence Interactive Sandbox */
-                  <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 gap-3">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                            Live Logic Sandbox
-                          </span>
-                          <h4 className="text-base font-bold text-white">Priority Engine &amp; Socratic AI Solver</h4>
-                        </div>
-                        <p className="text-xs text-zinc-400 mt-1">
-                          Test Farhan's board recurrence algorithm and KaTeX step-by-step mathematical reasoning.
-                        </p>
-                      </div>
-
-                      <button
-                        onClick={() => {
-                          setHscAiSimulating(true);
-                          setTimeout(() => {
-                            setHscRevealedStep((prev) => Math.min(prev + 1, 3));
-                            setHscAiSimulating(false);
-                          }, 600);
-                        }}
-                        disabled={hscAiSimulating || hscRevealedStep >= 3}
-                        className="px-4 py-2 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-xs flex items-center gap-2 transition-all shadow-lg disabled:opacity-50 cursor-pointer self-start sm:self-auto"
-                      >
-                        <Zap className="w-3.5 h-3.5" />
-                        <span>{hscAiSimulating ? 'Socratic Reasoning...' : hscRevealedStep >= 3 ? 'Solution Complete' : 'Next Socratic Step'}</span>
-                      </button>
-                    </div>
-
-                    {/* Topic Selector & Priority Score Live Calculator */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                      {/* Left: Topic Selector */}
-                      <div className="md:col-span-7 space-y-3">
-                        <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">
-                          1. Select Curriculum Chapter:
-                        </span>
-                        <div className="grid grid-cols-2 gap-2">
-                          {[
-                            { id: 'thermo', name: 'Carnot Engine & Efficiency', subject: 'Physics 1st', boardCount: 18 },
-                            { id: 'dynamics', name: 'Moment of Inertia & Torque', subject: 'Physics 1st', boardCount: 15 },
-                            { id: 'vectors', name: 'Vector Projection & Work', subject: 'Physics 1st', boardCount: 12 },
-                            { id: 'calculus', name: 'Definite Integrals & Area', subject: 'Higher Math 1st', boardCount: 14 }
-                          ].map((topic) => (
-                            <button
-                              key={topic.id}
-                              onClick={() => {
-                                setHscSelectedTopic(topic.id as any);
-                                setHscRevealedStep(1);
-                              }}
-                              className={`p-3 rounded-xl border text-left transition-all text-xs cursor-pointer ${
-                                hscSelectedTopic === topic.id
-                                  ? 'bg-indigo-500/20 text-white border-indigo-500/50 shadow-sm'
-                                  : 'bg-zinc-950/60 text-zinc-400 border-white/5 hover:border-white/20 hover:text-zinc-200'
-                              }`}
-                            >
-                              <div className="flex items-center justify-between text-[10px] font-mono text-indigo-400 mb-1">
-                                <span>{topic.subject}</span>
-                                <span>{topic.boardCount}x in Boards</span>
-                              </div>
-                              <div className="font-semibold text-white line-clamp-1">{topic.name}</div>
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Weakness Slider */}
-                        <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/10 space-y-2">
-                          <div className="flex items-center justify-between text-xs font-mono">
-                            <span className="text-zinc-300">Simulate Personal Weakness Index:</span>
-                            <span className="text-indigo-400 font-bold">{hscWeaknessIndex}%</span>
-                          </div>
-                          <input
-                            type="range"
-                            min="10"
-                            max="100"
-                            value={hscWeaknessIndex}
-                            onChange={(e) => setHscWeaknessIndex(Number(e.target.value))}
-                            className="w-full accent-indigo-500 cursor-pointer"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Right: Calculated Priority Card */}
-                      <div className="md:col-span-5 p-4 rounded-xl bg-gradient-to-br from-indigo-950/40 via-zinc-950 to-zinc-900 border border-indigo-500/30 flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
-                            Algorithm Output
-                          </div>
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-extrabold text-white">
-                              {Math.min(99, Math.round((hscSelectedTopic === 'thermo' ? 18 : hscSelectedTopic === 'dynamics' ? 15 : hscSelectedTopic === 'vectors' ? 12 : 14) * 2.8 + hscWeaknessIndex * 0.4))}
-                            </span>
-                            <span className="text-xs text-zinc-400 font-mono">/ 100 Priority Score</span>
-                          </div>
-                          <p className="text-xs text-indigo-200 leading-relaxed">
-                            {hscWeaknessIndex >= 50
-                              ? "High Priority: High board frequency paired with unmastered concept."
-                              : "Moderate Priority: Good baseline grasp; schedule periodic revision."}
-                          </p>
-                        </div>
-
-                        <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                          <span>Action:</span>
-                          <span className="text-emerald-400 font-bold">Recommended First</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Socratic AI Decomposition Window */}
-                    <div className="p-4 rounded-xl bg-zinc-950 border border-white/10 space-y-3">
-                      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-                        <div className="flex items-center gap-2 text-xs font-semibold text-white">
-                          <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-                          <span>Socratic AI Step-by-Step Problem Breakdown</span>
-                        </div>
-                        <button
-                          onClick={() => setHscRevealedStep(1)}
-                          className="text-[11px] font-mono text-zinc-400 hover:text-white underline cursor-pointer"
-                        >
-                          Reset Steps
-                        </button>
-                      </div>
-
-                      {/* Problem Statement */}
-                      <div className="p-3 rounded-lg bg-zinc-900/70 border border-white/5 text-xs text-zinc-200">
-                        <strong>Sample CQ:</strong>{" "}
-                        {hscSelectedTopic === 'thermo'
-                          ? "A Carnot engine absorbs 1000 J of heat from a source at 500 K and rejects 600 J to the sink. Calculate its thermal efficiency (η) and sink temperature (T₂)."
-                          : hscSelectedTopic === 'dynamics'
-                          ? "A flywheel of mass 20 kg and radius 0.5 m rotates at 300 rpm. Calculate its moment of inertia (I) and rotational kinetic energy."
-                          : hscSelectedTopic === 'vectors'
-                          ? "Given vectors A = 2i + 3j - k and B = i - 2j + 4k, calculate the scalar dot product and the work done under force F = A along displacement B."
-                          : "Find the area bounded by the curve y = x² and the line y = 4 using definite integration."}
-                      </div>
-
-                      {/* Step 1 */}
-                      {hscRevealedStep >= 1 && (
-                        <div className="p-3 rounded-lg bg-indigo-950/30 border border-indigo-500/20 text-xs text-indigo-200 space-y-1">
-                          <span className="font-bold text-indigo-300 font-mono">Step 1 — Formula Identification:</span>
-                          <p className="font-mono text-zinc-200">
-                            {hscSelectedTopic === 'thermo'
-                              ? "Efficiency Formula: η = 1 - (Q₂ / Q₁) = 1 - (T₂ / T₁)"
-                              : hscSelectedTopic === 'dynamics'
-                              ? "Moment of Inertia Formula: I = 1/2 × M × R², Rotational KE = 1/2 × I × ω²"
-                              : hscSelectedTopic === 'vectors'
-                              ? "Scalar Product: A · B = (A_x × B_x) + (A_y × B_y) + (A_z × B_z)"
-                              : "Definite Integral: Area = ∫₋₂² (4 - x²) dx"}
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Step 2 */}
-                      {hscRevealedStep >= 2 && (
-                        <div className="p-3 rounded-lg bg-indigo-950/30 border border-indigo-500/20 text-xs text-indigo-200 space-y-1">
-                          <span className="font-bold text-indigo-300 font-mono">Step 2 — Value Substitution:</span>
-                          <p className="font-mono text-zinc-200">
-                            {hscSelectedTopic === 'thermo'
-                              ? "η = 1 - (600 J / 1000 J) = 1 - 0.60 = 0.40 (40%)"
-                              : hscSelectedTopic === 'dynamics'
-                              ? "I = 0.5 × 20 kg × (0.5 m)² = 2.5 kg·m²; ω = (2π × 300) / 60 = 10π rad/s"
-                              : hscSelectedTopic === 'vectors'
-                              ? "A · B = (2 × 1) + (3 × -2) + (-1 × 4) = 2 - 6 - 4 = -8 Joules"
-                              : "Area = [4x - x³/3]₋₂² = (8 - 8/3) - (-8 + 8/3) = 32/3 = 10.67 sq units"}
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Step 3 */}
-                      {hscRevealedStep >= 3 && (
-                        <div className="p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 space-y-1">
-                          <span className="font-bold text-emerald-300 font-mono">Step 3 — Final Answer &amp; Board Exam Insight:</span>
-                          <p className="font-mono text-zinc-200">
-                            {hscSelectedTopic === 'thermo'
-                              ? "Sink Temperature: T₂ = T₁ × (1 - η) = 500 K × 0.60 = 300 K (27°C). [Common Board Trap: Ensure temperature is always in Kelvin!]"
-                              : hscSelectedTopic === 'dynamics'
-                              ? "Rotational KE = 0.5 × 2.5 × (10π)² = 1.25 × 986.96 = 1233.7 Joules."
-                              : hscSelectedTopic === 'vectors'
-                              ? "Work Done = -8 J. Negative work indicates force opposes motion direction."
-                              : "Total area = 32/3 square units. Verified symmetric across y-axis."}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ) : project.id === 'atlas' ? (
-                  <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                      <div>
-                        <h4 className="text-base font-bold text-white">Atlas Command Workspace</h4>
-                        <p className="text-xs text-zinc-400">Test task addition, habit check-off, and AI decomposition</p>
-                      </div>
-                      <button
-                        onClick={handleAiBreakdown}
-                        disabled={aiDecomposing}
-                        className="px-3.5 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-medium text-xs flex items-center gap-2 transition-all shadow-lg disabled:opacity-50"
-                      >
-                        <Zap className="w-4 h-4 text-amber-600" />
-                        <span>{aiDecomposing ? 'AI Thinking...' : 'Trigger AI Subtasks'}</span>
-                      </button>
-                    </div>
-
-                    {/* Task Creator Form */}
-                    <form onSubmit={handleAddTask} className="flex gap-2">
-                      <input
-                        type="text"
-                        value={newTaskInput}
-                        onChange={(e) => setNewTaskInput(e.target.value)}
-                        placeholder="Add new task to Atlas workspace..."
-                        className="flex-1 bg-zinc-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/30"
-                      />
-                      <button
-                        type="submit"
-                        className="px-4 py-2.5 bg-white hover:bg-zinc-200 text-black font-semibold rounded-xl text-xs flex items-center gap-1.5 transition-all"
-                      >
-                        <Plus className="w-4 h-4" />
-                        <span>Add Task</span>
-                      </button>
-                    </form>
-
-                    {/* Sample Task List */}
-                    <div className="space-y-2">
-                      {sampleTasks.map((t) => (
-                        <div
-                          key={t.id}
-                          onClick={() => handleToggleTask(t.id)}
-                          className="flex items-center justify-between p-3 rounded-xl bg-zinc-950/60 border border-white/10 hover:border-white/20 cursor-pointer transition-all"
-                        >
-                          <div className="flex items-center gap-3">
-                            <input
-                              type="checkbox"
-                              checked={t.done}
-                              onChange={() => handleToggleTask(t.id)}
-                              className="rounded border-zinc-700 bg-zinc-900 text-white focus:ring-white h-4 w-4"
-                            />
-                            <span className={`text-xs ${t.done ? 'line-through text-zinc-500' : 'text-zinc-200'}`}>
-                              {t.text}
-                            </span>
-                          </div>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/10 text-zinc-300">
-                            {t.tag}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : project.id === 'gym-tracker' ? (
-                  /* Gym Tracker Interactive Demo */
-                  <div className="p-6 rounded-2xl bg-zinc-900/80 border border-white/10 space-y-6">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                      <div>
-                        <h4 className="text-base font-bold text-white">Gym Tracker Live Workout Set Logger</h4>
-                        <p className="text-xs text-zinc-400">Interactive set and rep logging with live overload volume calculation</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3">
-                      {sampleSets.map((s, idx) => (
-                        <div key={s.id} className="p-3.5 rounded-xl bg-zinc-950 border border-white/10 flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <span className="w-6 h-6 rounded-full bg-zinc-800 text-zinc-300 font-mono text-xs flex items-center justify-center font-bold">
-                              {idx + 1}
-                            </span>
-                            <div>
-                              <span className="text-xs font-semibold text-white">{s.exercise}</span>
-                              <div className="text-[11px] text-zinc-400">
-                                {s.weight} lbs × {s.reps} reps ({s.weight * s.reps} lbs volume)
-                              </div>
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => {
-                              setSampleSets(sampleSets.map(item => item.id === s.id ? { ...item, completed: !item.completed } : item));
-                            }}
-                            className={`px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all ${
-                              s.completed
-                                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                                : 'bg-zinc-800 text-zinc-400 hover:text-white'
-                            }`}
-                          >
-                            {s.completed ? 'Completed' : 'Mark Done'}
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-            )}
           </div>
 
           {/* Modal Footer */}

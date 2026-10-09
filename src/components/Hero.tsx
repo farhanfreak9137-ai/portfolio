@@ -9,7 +9,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate, onOpenResume }) => {
   const [copiedCode, setCopiedCode] = useState(false);
-  const [activeCodeTab, setActiveCodeTab] = useState<'agent-hq' | 'auren' | 'config' | 'atlas' | 'hsc' | 'stack'>('agent-hq');
+  const [activeCodeTab, setActiveCodeTab] = useState<'agent-hq' | 'auren' | 'watchvault' | 'config' | 'atlas' | 'hsc' | 'stack'>('agent-hq');
 
   const codeSnippets = {
     'agent-hq': `// AgentHQOrchestrator.ts
@@ -42,6 +42,22 @@ export async function processCareerIntent(query: string) {
 
   // 3. Execute with strict SQLite verified memory grounding
   return tool.execute({ grounding: "VERIFIED_MEMORY" });
+}`,
+    watchvault: `// WatchVaultSync.ts
+import { db, runAsRemoteApply } from '@/lib/db';
+import { supabase } from '@/lib/supabase';
+
+export async function syncPersonalVault() {
+  // 1. Push local changes since watermark (offline-first)
+  const unsynced = await db.library_items
+    .where('updated_at').above(lastWatermark)
+    .toArray();
+  await supabase.from('sync_records').upsert(unsynced);
+
+  // 2. Pull server changes & resolve Last-Write-Wins (LWW)
+  const { data: serverRows } = await supabase
+    .from('sync_records').select('*').gt('server_updated_at', pullCursor);
+  return runAsRemoteApply(() => db.library_items.bulkPut(serverRows));
 }`,
     config: `// farhan.config.ts
 export const developer = {
@@ -247,6 +263,16 @@ export const coreSkills = [
                   }`}
                 >
                   auren.ts
+                </button>
+                <button
+                  onClick={() => setActiveCodeTab('watchvault')}
+                  className={`px-3 py-1.5 rounded-t-lg transition-colors cursor-pointer ${
+                    activeCodeTab === 'watchvault'
+                      ? 'bg-zinc-900 text-rose-400 border-t-2 border-rose-400 font-semibold'
+                      : 'text-zinc-500 hover:text-zinc-300'
+                  }`}
+                >
+                  WatchVault.ts
                 </button>
                 <button
                   onClick={() => setActiveCodeTab('config')}

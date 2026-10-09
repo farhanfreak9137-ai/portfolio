@@ -22,6 +22,12 @@ import aurenOpportunitiesImg from '../assets/images/auren_opportunities_matcher.
 import aurenComputerControlImg from '../assets/images/auren_computer_control.png';
 import aurenKnowledgeRagImg from '../assets/images/auren_knowledge_rag.png';
 import aurenVoiceInterfaceImg from '../assets/images/auren_voice_interface.png';
+import watchvaultHomeImg from '../assets/images/watchvault_discovery_home.png';
+import watchvaultTitleImg from '../assets/images/watchvault_title_details.png';
+import watchvaultSeriesgraphImg from '../assets/images/watchvault_seriesgraph_matrix.png';
+import watchvaultLibraryImg from '../assets/images/watchvault_library_vault.png';
+import watchvaultMobileImg from '../assets/images/watchvault_mobile_pwa.png';
+import watchvaultSyncImg from '../assets/images/watchvault_sync_settings.png';
 
 
 export const personalInfo: PersonalInfo = {
@@ -34,7 +40,7 @@ export const personalInfo: PersonalInfo = {
   bioHeading: "Crafting modern web applications & AI tools with speed and precision.",
   bioParagraphs: [
     "I'm Md Farhan Hossain, a frontend developer and AI builder based in Dhaka, Bangladesh. With a solid academic foundation in Science from MDC Model Institute (SSC 2025) and Milestone College (Science Stream), I bridge computational foundations with modern, hands-on web application development.",
-    "My journey in code gained momentum when I embraced Artificial Intelligence as a force-multiplier in software engineering. What began as curiosity quickly grew into constructing full-featured, real-world tools—from autonomous multi-agent orchestration engines (Agent HQ) and personal career operating systems (Auren) to daily productivity operating systems (Atlas) and curriculum-grounded study intelligence platforms (HSC AI System).",
+    "My journey in code gained momentum when I embraced Artificial Intelligence as a force-multiplier in software engineering. What began as curiosity quickly grew into constructing full-featured, real-world tools—from autonomous multi-agent orchestration engines (Agent HQ) and personal career operating systems (Auren) to offline-first cinematic media tracking vaults (WatchVault), daily productivity operating systems (Atlas) and curriculum-grounded study intelligence platforms (HSC AI System).",
     "I specialize in building highly responsive user interfaces using React, Next.js, TypeScript, and Tailwind CSS, coupled with intelligent AI features using the Google Gemini API. I focus on sub-100ms state updates, modular architecture, clean typography, and zero visual bloat.",
     "Whether architecting interactive dashboards or crafting custom workflows, my focus remains constant: converting complex user problems into elegant, production-ready software experiences."
   ],
@@ -193,6 +199,42 @@ export const aurenScreenshotMetadata = [
   {
     title: "6. Real-Time Voice Interface & Speech Safety",
     description: "Streaming voice interaction pipeline (STT → Central Assistant → Policy Boundary → TTS) with provider state validation (REAL, MOCK, UNAVAILABLE) and single-approval safety rules."
+  }
+];
+
+export const watchvaultScreenshots = [
+  watchvaultHomeImg,
+  watchvaultTitleImg,
+  watchvaultSeriesgraphImg,
+  watchvaultLibraryImg,
+  watchvaultMobileImg,
+  watchvaultSyncImg,
+];
+
+export const watchvaultScreenshotMetadata = [
+  {
+    title: "1. Cinematic Discovery & Seed-Based Feeds",
+    description: "Real trending movies, TV series, curated genre rows, debounced global search, and dynamic personalized recommendation rows derived from personal library seeds."
+  },
+  {
+    title: "2. Title Details & 'MY WATCH' Tracking Center",
+    description: "Cinematic media details, cast carousel, streaming availability, 10-star rating selector, watch status badges (Watching, Completed, Plan to Watch, Dropped), private notes, and box-office financial analysis."
+  },
+  {
+    title: "3. SeriesGraph Episode Rating Heatmap Matrix",
+    description: "IMDb/SeriesGraph-style episode rating matrix with high-contrast color binning (Masterpiece to Weak), season averages, interactive rating trendlines, and per-episode popover reviews."
+  },
+  {
+    title: "4. Personal Library Vault (Zero Mock Data)",
+    description: "Authentic local-first media archive powered by Dexie IndexedDB with real-time status tabs, favorite filters, sort controls, and strictly authentic viewing statistics."
+  },
+  {
+    title: "5. Mobile PWA & Android Experience",
+    description: "Native mobile app shell with Capacitor integration, safe-area support, touch-optimized bottom navigation, and haptic feedback."
+  },
+  {
+    title: "6. Bidirectional Cloud Sync & Conflict Resolver",
+    description: "Offline-first sync engine with Supabase Realtime, last-write-wins (LWW) conflict resolution, outbox watermark tracking, soft-deletion tombstones, and JSON data backup/export."
   }
 ];
 
@@ -382,7 +424,99 @@ export const projects: Project[] = [
       }
     ]
   },
-
+  {
+    id: "watchvault",
+    name: "WatchVault",
+    category: "Cinematic Media Tracking & Offline-First Archive",
+    tagline: "Private personal movie & TV vault with SeriesGraph episode heatmaps, Dexie IndexedDB offline architecture, and multi-device sync.",
+    description: "A private personal movie and TV/web-series archive and tracking system designed with Netflix-grade cinematic discovery, Letterboxd-depth personal tracking, IMDb/SeriesGraph-style episode rating heatmaps, offline-first IndexedDB storage via Dexie.js, and bidirectional cloud sync backed by Supabase with conflict resolution and soft-deletion tombstones.",
+    problem: "Commercial streaming trackers (Letterboxd, Trakt, TV Time) suffer from invasive ad tracking, lack true offline access when traveling, lack fine-grained season-by-season episode rating matrices (SeriesGraph heatmaps), and blend personal collections with cluttered social feeds and bloated mock data.",
+    solution: "Architected WatchVault with a strict zero-mock-data guarantee: a high-performance offline-first architecture using Dexie IndexedDB as the primary source of truth, an outbox-pattern cloud sync engine backed by Supabase with last-write-wins (LWW) conflict resolution and soft deletes, interactive SeriesGraph episode rating heatmaps, and personalized recommendation feeds dynamically derived from user library seeds.",
+    technologies: [
+      "Next.js 16 (App Router)",
+      "React 19",
+      "TypeScript",
+      "Dexie.js (IndexedDB)",
+      "Supabase (PostgreSQL & Realtime)",
+      "Tailwind CSS 4",
+      "Capacitor 8 (Android)",
+      "TMDB API",
+      "Lucide Icons",
+      "Web App Manifest (PWA)"
+    ],
+    screenshots: watchvaultScreenshots,
+    screenshotTitles: watchvaultScreenshotMetadata.map(m => m.title),
+    screenshotDescriptions: watchvaultScreenshotMetadata.map(m => m.description),
+    liveUrl: "https://github.com/farhanfreak9137-ai/moviewatchlist",
+    githubUrl: "https://github.com/farhanfreak9137-ai/moviewatchlist",
+    isFeatured: true,
+    caseStudy: {
+      architectureOverview: "WatchVault is architected around an offline-first, client-authoritative data layer: a local IndexedDB database managed via Dexie.js serves as the primary source of truth for all UI reads, mutations, and stats computations. A background sync engine synchronizes state bidirectionally with a Supabase PostgreSQL backend using watermark tracking, last-write-wins (LWW) conflict resolution, and soft-delete tombstones. The discovery layer proxies TMDB APIs with a 3-day Dexie TTL cache and calculates personalized recommendations from library seeds.",
+      componentHierarchy: [
+        "AppShell (Cinematic Navigation, Responsive Sidebar, Mobile BottomNav, SyncStatusBadge)",
+        "DiscoveryEngine (HeroBanner, MediaRow, CuratedHubs, SeedBasedRecommender, DebouncedSearch)",
+        "TitleDetailCenter (Cinematic Backdrop, PersonalWatchSection, StarRating, Financials, CastCarousel)",
+        "SeriesGraphMatrix (Season-by-Season Heatmap Matrix, Color Binning, Rating Trendlines, Episode Modal)",
+        "PersonalLibraryVault (Dexie Live Query Hook, Media Filter Tabs, Sort Matrix, EmptyState Guidance)",
+        "OfflineSyncEngine (Push Outbox, Pull Cursor, Supabase Realtime Channel, Tombstone Garbage Collector)",
+        "StatsAnalyticsDashboard (Authentic Runtime Aggregators, Genre Breakdown, Rating Distribution, Milestone Badges)"
+      ],
+      stateStrategy: "Employs reactive Dexie.js live queries (useLibrary) as the single source of truth for instantaneous sub-5ms local UI updates. Sync state and network online/offline listeners feed an event-driven outbox that queues remote sync passes without blocking user interactions.",
+      technicalChallenges: [
+        {
+          challenge: "Preventing infinite sync echo loops when changes pulled from the remote Supabase server are written to local IndexedDB.",
+          solution: "Engineered a reentrancy-safe runAsRemoteApply wrapper with a reference counter (remoteApplyDepth) that temporarily suppresses local Dexie change notification events during remote hydration."
+        },
+        {
+          challenge: "Preventing deleted records on one device from being resurrected by outdated offline devices upon reconnection.",
+          solution: "Implemented soft-deletion tombstones (is_deleted: true, deleted_at: timestamp) with incremental sync versioning, guaranteeing deletions propagate across all nodes before physical compaction."
+        },
+        {
+          challenge: "Rendering dense multi-season episode rating matrices (SeriesGraph) with instant response times on mobile devices.",
+          solution: "Built a memoized rating binning pipeline with CSS grid virtualization and dynamic contrast-ratio calculation, rendering hundreds of episode cards with zero layout jank."
+        }
+      ],
+      outcomes: [
+        "Strict zero-mock-data guarantee: 100% of user statistics and metrics computed strictly from authentic IndexedDB records.",
+        "Sub-5ms library read latency and full offline usability across desktop browsers and Android PWA / APK.",
+        "Production-grade SeriesGraph episode rating heatmaps and seed-based algorithmic recommendation pipeline."
+      ]
+    },
+    features: [
+      {
+        title: "Zero Mock Data & Authentic Personal Vault",
+        description: "Launches with a pristine authentic library (0 movies, 0 series, 0 watched); all metrics, total runtimes, and genre distributions are calculated strictly from IndexedDB."
+      },
+      {
+        title: "SeriesGraph Episode Rating Matrix & Heatmap",
+        description: "Interactive episode rating heatmap with high-contrast color binning (Masterpiece to Weak), season averages, trendline graphs, and episode review popovers."
+      },
+      {
+        title: "Offline-First Dexie Architecture",
+        description: "Local IndexedDB database as the primary source of truth, enabling instantaneous sub-5ms reads, offline library browsing, rating updates, and episode checklists."
+      },
+      {
+        title: "Bidirectional Cloud Sync & Conflict Resolution",
+        description: "Supabase PostgreSQL sync with last-write-wins (LWW) conflict handling, outbox watermark tracking, Realtime WebSocket push events, and soft-delete tombstones."
+      },
+      {
+        title: "Seed-Based Personalized Recommendations",
+        description: "Algorithmic discovery feeds deriving recommendations dynamically from high-interest personal library seeds (favorites and 8+ star ratings)."
+      },
+      {
+        title: "Financial ROI & Commercial Multipliers",
+        description: "Calculates budget vs worldwide box-office revenue performance with 2.5x break-even rule multipliers and era-adjusted commercial status verdicts."
+      },
+      {
+        title: "Smart 'What to Watch' Surprise Dice Roll",
+        description: "Algorithmic backlog selector rolling through unwatched and planned library items with duration and genre constraints to eliminate decision fatigue."
+      },
+      {
+        title: "Android APK & Installable PWA Shell",
+        description: "Packaged as an Android app with Capacitor 8 and PWA service worker shell caching, safe-area insets, and haptic feedback."
+      }
+    ]
+  },
   {
     id: "hsc-ai-system",
     name: "HSC AI Study Intelligence System",

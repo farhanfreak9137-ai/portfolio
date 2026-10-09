@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, ArrowRight, Layers, Layout, Sparkles, CheckCircle2, GraduationCap, BrainCircuit, BookOpen, Clock, Award, ShieldAlert, Bot, Workflow, Mail, Bell, Database, Cpu } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Layers, Layout, Sparkles, CheckCircle2, GraduationCap, BrainCircuit, BookOpen, Clock, Award, ShieldAlert, Bot, Workflow, Mail, Bell, Database, Cpu, Film, Tv, Grid3X3, Smartphone } from 'lucide-react';
 import { projects } from '../data/portfolioData';
 import { Project } from '../types';
 
@@ -7,19 +7,22 @@ interface SelectedWorkProps {
   onSelectProject: (project: Project) => void;
   onOpenAgentHqCaseStudy?: () => void;
   onOpenAurenCaseStudy?: () => void;
+  onOpenWatchvaultCaseStudy?: () => void;
   onOpenAtlasCaseStudy?: () => void;
   onOpenHscCaseStudy?: () => void;
 }
 
-export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onOpenAgentHqCaseStudy, onOpenAurenCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
+export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onOpenAgentHqCaseStudy, onOpenAurenCaseStudy, onOpenWatchvaultCaseStudy, onOpenAtlasCaseStudy, onOpenHscCaseStudy }) => {
   const agentHqProject = projects.find(p => p.id === 'agent-hq') || projects[0];
   const aurenProject = projects.find(p => p.id === 'auren') || projects[1];
-  const atlasProject = projects.find(p => p.id === 'atlas') || projects[2];
-  const hscProject = projects.find(p => p.id === 'hsc-ai-system') || projects[3];
-  const gymProject = projects.find(p => p.id === 'gym-tracker') || projects[4];
+  const watchvaultProject = projects.find(p => p.id === 'watchvault') || projects[2];
+  const atlasProject = projects.find(p => p.id === 'atlas') || projects[3];
+  const hscProject = projects.find(p => p.id === 'hsc-ai-system') || projects[4];
+  const gymProject = projects.find(p => p.id === 'gym-tracker') || projects[5];
 
   const [activeAgentHqScreenshotIndex, setActiveAgentHqScreenshotIndex] = useState(0);
   const [activeAurenScreenshotIndex, setActiveAurenScreenshotIndex] = useState(0);
+  const [activeWatchvaultScreenshotIndex, setActiveWatchvaultScreenshotIndex] = useState(0);
   const [activeAtlasScreenshotIndex, setActiveAtlasScreenshotIndex] = useState(0);
   const [activeHscScreenshotIndex, setActiveHscScreenshotIndex] = useState(0);
 
@@ -155,7 +158,7 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white font-semibold text-sm border border-white/10 transition-all active:scale-95 cursor-pointer"
                 >
                   <Workflow className="w-4 h-4 text-cyan-400" />
-                  <span>Interactive Live Demo</span>
+                  <span>Quick Preview</span>
                 </button>
 
                 {agentHqProject.githubUrl && (
@@ -328,7 +331,7 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white font-semibold text-sm border border-white/10 transition-all active:scale-95 cursor-pointer"
                 >
                   <Bot className="w-4 h-4 text-indigo-400" />
-                  <span>Interactive Live Demo</span>
+                  <span>Quick Preview</span>
                 </button>
 
                 {aurenProject.githubUrl && (
@@ -390,7 +393,183 @@ export const SelectedWork: React.FC<SelectedWorkProps> = ({ onSelectProject, onO
           </div>
         </div>
 
-        {/* 3. ATLAS FEATURED SHOWCASE */}
+        {/* 3. WATCHVAULT MEDIA VAULT SHOWCASE */}
+        <div className="relative rounded-3xl bg-zinc-900/40 border border-rose-500/20 hover:border-rose-500/40 transition-all shadow-2xl overflow-hidden group">
+          {/* Subtle accent glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-rose-500/10 blur-[130px] rounded-full pointer-events-none" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 lg:p-12 items-center">
+            
+            {/* Left Info Column */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <div className="flex items-center gap-3">
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/20">
+                  {watchvaultProject.category}
+                </span>
+                <span className="text-xs text-rose-400 font-mono font-medium flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+                  Offline-First Media Vault
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
+                  {watchvaultProject.name}
+                </h3>
+                <p className="text-zinc-300 font-medium text-sm sm:text-base">
+                  {watchvaultProject.tagline}
+                </p>
+              </div>
+
+              <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+                {watchvaultProject.description}
+              </p>
+
+              {/* System Architecture Highlights */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-rose-300 font-semibold">
+                    <Database className="w-3.5 h-3.5" />
+                    <span>Dexie IndexedDB</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Sub-5ms local reads with 100% genuine zero-mock-data statistics.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-rose-300 font-semibold">
+                    <Grid3X3 className="w-3.5 h-3.5" />
+                    <span>SeriesGraph Heatmap</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    High-contrast episode rating matrix and trajectory trendlines.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-rose-300 font-semibold">
+                    <Workflow className="w-3.5 h-3.5" />
+                    <span>Supabase LWW Sync</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Watermark outbox sync with Last-Write-Wins and tombstones.
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-950/70 border border-white/5 space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-mono text-rose-300 font-semibold">
+                    <Smartphone className="w-3.5 h-3.5" />
+                    <span>Android APK &amp; PWA</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400">
+                    Capacitor 8 Android app and installable offline PWA shell.
+                  </p>
+                </div>
+              </div>
+
+              {/* Technology Tags */}
+              <div className="space-y-2 pt-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">
+                  Technologies
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {watchvaultProject.technologies.slice(0, 8).map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-white/10 text-xs text-zinc-300 font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {watchvaultProject.technologies.length > 8 && (
+                    <span className="px-2.5 py-1 rounded-lg bg-zinc-900/60 border border-white/5 text-xs text-zinc-400 font-mono">
+                      +{watchvaultProject.technologies.length - 8} more
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                {onOpenWatchvaultCaseStudy && (
+                  <button
+                    onClick={onOpenWatchvaultCaseStudy}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-bold text-sm transition-all shadow-md shadow-rose-500/20 active:scale-95 cursor-pointer"
+                  >
+                    <span>Explore Full Case Study</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
+
+                <button
+                  onClick={() => onSelectProject(watchvaultProject)}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white font-semibold text-sm border border-white/10 transition-all active:scale-95 cursor-pointer"
+                >
+                  <Film className="w-4 h-4 text-rose-400" />
+                  <span>Quick Preview</span>
+                </button>
+
+                {watchvaultProject.githubUrl && (
+                  <a
+                    href={watchvaultProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white font-semibold text-sm border border-white/10 transition-all cursor-pointer"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Right Interactive Visual Column */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl group">
+                <img
+                  src={watchvaultProject.screenshots[activeWatchvaultScreenshotIndex] || watchvaultProject.screenshots[0]}
+                  alt="WatchVault Screenshot"
+                  className="w-full h-auto object-cover max-h-[440px] transition-transform duration-500 group-hover:scale-[1.01]"
+                />
+
+                {/* Screenshot caption overlay */}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/80 to-transparent p-4 text-left">
+                  <p className="text-xs font-mono font-semibold text-rose-300">
+                    {watchvaultProject.screenshotTitles?.[activeWatchvaultScreenshotIndex] || "WatchVault Interface"}
+                  </p>
+                  <p className="text-[11px] text-zinc-300 mt-0.5 line-clamp-2 font-normal">
+                    {watchvaultProject.screenshotDescriptions?.[activeWatchvaultScreenshotIndex]}
+                  </p>
+                </div>
+              </div>
+
+              {/* Screenshot Selector Buttons */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                {watchvaultProject.screenshots.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveWatchvaultScreenshotIndex(idx)}
+                    className={`px-2 py-2 rounded-xl border text-center transition-all text-xs font-mono cursor-pointer ${
+                      activeWatchvaultScreenshotIndex === idx
+                        ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 font-bold shadow-sm'
+                        : 'bg-zinc-900/60 text-zinc-400 border-white/5 hover:border-white/15 hover:text-white'
+                    }`}
+                  >
+                    {idx === 0 ? "1. Discovery" : 
+                     idx === 1 ? "2. Details" : 
+                     idx === 2 ? "3. Heatmap" : 
+                     idx === 3 ? "4. Library" : 
+                     idx === 4 ? "5. Mobile" : "6. Cloud Sync"}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* 4. ATLAS FEATURED SHOWCASE */}
         <div className="relative rounded-3xl bg-zinc-900/40 border border-white/10 hover:border-[#4DA3FF]/30 transition-all shadow-2xl overflow-hidden group">
           {/* Subtle accent glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#4DA3FF]/10 blur-[120px] rounded-full pointer-events-none" />

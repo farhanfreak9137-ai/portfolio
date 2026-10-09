@@ -218,6 +218,16 @@ FEATURED PROJECTS:
                 </p>
               </div>
 
+              <div className="p-5 rounded-xl bg-zinc-900/60 border border-rose-500/30 space-y-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-bold text-white">WatchVault — Offline-First Media Vault &amp; SeriesGraph</h3>
+                  <span className="text-xs font-mono text-rose-300">Next.js 16 • Dexie.js • Supabase Realtime • PWA / APK</span>
+                </div>
+                <p className="text-xs text-zinc-300 leading-relaxed">
+                  Private personal movie &amp; TV vault with zero mock data, SeriesGraph episode rating heatmaps, sub-5ms offline-first IndexedDB queries, and bidirectional cloud synchronization with Last-Write-Wins and tombstone conflict handling.
+                </p>
+              </div>
+
               <div className="p-5 rounded-xl bg-zinc-900/60 border border-white/10 space-y-2">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-bold text-white">Atlas — Personal Productivity AI OS</h3>
